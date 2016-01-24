@@ -1,0 +1,29 @@
+{
+  "": {
+    "swift-dependencies": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Main/master.swiftdeps"
+  },
+  "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/Sources/Main/classification.swift": {
+    "dependencies": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Main/classification.d",
+    "object": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Sources/Main/classification.swift.o",
+    "swiftmodule": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Main/classification~partial.swiftmodule",
+    "swift-dependencies": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Main/classification.swiftdeps"
+  },
+  "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/Sources/Main/main.swift": {
+    "dependencies": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Main/main.d",
+    "object": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Sources/Main/main.swift.o",
+    "swiftmodule": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Main/main~partial.swiftmodule",
+    "swift-dependencies": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Main/main.swiftdeps"
+  },
+  "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/Sources/Main/model_based_filtering.swift": {
+    "dependencies": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Main/model_based_filtering.d",
+    "object": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Sources/Main/model_based_filtering.swift.o",
+    "swiftmodule": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Main/model_based_filtering~partial.swiftmodule",
+    "swift-dependencies": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Main/model_based_filtering.swiftdeps"
+  },
+  "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/Sources/Main/utilities.swift": {
+    "dependencies": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Main/utilities.d",
+    "object": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Sources/Main/utilities.swift.o",
+    "swiftmodule": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Main/utilities~partial.swiftmodule",
+    "swift-dependencies": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Main/utilities.swiftdeps"
+  }
+}

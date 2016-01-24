@@ -1,0 +1,2 @@
+
+XCTMain([ TestClassifier() ])

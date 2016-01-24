@@ -1,0 +1,8 @@
+version: "Apple Swift version 2.2-dev (LLVM 3ebdbb2c7e, Clang f66c5bb67b, Swift 42591f7cba)"
+options: "6ecd223f6ccd2972f558ea1451cf0c17"
+build_time: [506920453, 255152000]
+inputs:
+  "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/Sources/Main/classification.swift": [506913028, 0]
+  "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/Sources/Main/main.swift": [506920440, 0]
+  "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/Sources/Main/model_based_filtering.swift": [506879680, 0]
+  "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/Sources/Main/utilities.swift": [506888949, 0]
