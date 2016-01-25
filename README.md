@@ -1,2 +1,2 @@
 # Floi
-A collection of Machine Learning Programs written in Swift
+A collection of Machine Learning Programs written in Swift.
