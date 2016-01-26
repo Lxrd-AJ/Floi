@@ -2,7 +2,7 @@ import Foundation
 
 typealias Accuracy = Double
 
-func test( training:String, test:String ) throws -> Accuracy {
+func testAthletesDataSet( training:String, test:String ) throws -> Accuracy {
     print("Training with \(training)")
     print("Classfying with \(test)")
 
@@ -21,5 +21,5 @@ func test( training:String, test:String ) throws -> Accuracy {
 var accuracy = 0.0
 
 print("\n")
-accuracy = try! test( "Data/athletesTrainingSet.txt", test:"Data/athletesTestSet.txt" )
+accuracy = try! testAthletesDataSet( "Data/athletesTrainingSet.txt", test:"Data/athletesTestSet.txt" )
 print("Accuracy is \(accuracy * 100)%")
