@@ -1,5 +1,6 @@
 //TODO: Write a function for computeNearestNeighbour
 
+import Foundation
 
 enum Choice {
     case Like
@@ -20,6 +21,13 @@ func computeNearestNeighbour( item:String , itemVector:[Double], items:[String:[
         }
     }
     return distances.sort()
+}
+
+func readFile( path:String , encoding: NSStringEncoding = NSUTF8StringEncoding ) -> String? {
+    guard NSFileManager().fileExistsAtPath( path ) else{ return nil }
+    do{ return try String( contentsOfFile:path, encoding:encoding ); }
+    catch{ print(error) }
+    return nil;
 }
 
 // func classify( user, itemName, itemVectors )

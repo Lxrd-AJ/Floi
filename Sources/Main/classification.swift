@@ -1,3 +1,4 @@
+
 import Foundation
 
 class Classifier {
@@ -5,24 +6,15 @@ class Classifier {
     var format: [String] = []
     var data: [(classification:String, vector:[Double], ignore:[String])] = []
 
-    init( filename:String ){
+    init( filename:String, dataParser:DataParser ){
         //read the file and Parse the Data into the required format
-        if let contentsOfFile = Classifier.readFile(filename) {
-            let lines: [String] = contentsOfFile.componentsSeparatedByString("\n");
-            var contents : [[String]] = lines.map({ $0.componentsSeparatedByString("\t") })
-
-            self.format = contents[0]; //Dataset specific, the first line contains the format
-            self.data = Classifier.parseData( Array(contents[1..<contents.count]) , format: self.format );
-
-            //Normalize the vectors in our data
-            let vectors_data:[[Double]] = data.map({ $0.vector });
-            let normalized_vectors = normalize( vectors_data );
-            for i in 0..<normalized_vectors.count {
-                self.data[i].vector = normalized_vectors[i];
-            }
-
-        }else{ print("Failed to read File.  Program Complete"); }
-
+        self.data = dataParser.parseFile(filename);
+        //Normalize the vectors in our data
+        let vectors_data:[[Double]] = self.data.map({ $0.vector });
+        let normalized_vectors = normalize( vectors_data );
+        for i in 0..<normalized_vectors.count {
+            self.data[i].vector = normalized_vectors[i];
+        }
     }
 
     func classify( vector:[Double] ) -> String {
@@ -93,31 +85,4 @@ class Classifier {
         }
     }
 
-    class func parseData( contents:[[String]], format:[String] ) -> [(classification:String, vector:[Double], ignore:[String])] {
-        var data: [(classification:String, vector:[Double], ignore:[String])] = []
-        for line in contents {
-            var dataEntry = (classification:"", vector:[Double](), ignore:[String]())
-            for i in 0..<line.count {
-                switch format[i] {
-                    case "num":
-                        dataEntry.vector.append( Double(line[i])! );
-                    case "comment":
-                        dataEntry.ignore.append( line[i] )
-                    case "class":
-                        dataEntry.classification = line[i]
-                    default:
-                        break;
-                }
-            }
-            data.append( dataEntry );
-        }
-        return data;
-    }
-
-    class func readFile( path:String , encoding: NSStringEncoding = NSUTF8StringEncoding ) -> String? {
-        guard NSFileManager().fileExistsAtPath( path ) else{ return nil }
-        do{ return try String( contentsOfFile:path, encoding:encoding ); }
-        catch{ print(error) }
-        return nil;
-    }
 }

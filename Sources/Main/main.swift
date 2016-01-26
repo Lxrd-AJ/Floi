@@ -68,18 +68,16 @@ func test( training:String, test:String ) throws -> Accuracy {
     print("Training with \(training)")
     print("Classfying with \(test)")
 
-    let classifier = Classifier( filename:training )
-    if let contentsOfFile = Classifier.readFile(test) {
-        let lines: [String] = contentsOfFile.componentsSeparatedByString("\n");
-        let contents : [[String]] = lines.map({ $0.componentsSeparatedByString("\t") })
-        let testData:[(classification:String, vector:[Double], ignore:[String])] = Classifier.parseData( Array(contents[1..<contents.count]) , format: classifier.format );
-        var accuracy = 0
-        for data in testData {
-            let guess = classifier.classify( data.vector );
-            if guess == data.classification { accuracy+=1 }
-        }
-        return Double(accuracy) / Double(testData.count)
-    }else{ print("***Failed to read file***"); throw ProgramError.ChuckNorris }
+    let parser = AtheletesParser();
+    let classifier = Classifier( filename:training, dataParser:parser )
+
+    let testData:[(classification:String, vector:[Double], ignore:[String])] = parser.parseFile( test );
+    var accuracy = 0; 
+    for data in testData {
+        let guess = classifier.classify( data.vector );
+        if guess == data.classification { accuracy+=1 }
+    }
+    return Double(accuracy) / Double(testData.count)
 }
 
 var accuracy = 0.0

@@ -2,11 +2,23 @@
   "": {
     "swift-dependencies": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Main/master.swiftdeps"
   },
+  "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/Sources/Main/AthletesParser.swift": {
+    "dependencies": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Main/AthletesParser.d",
+    "object": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Sources/Main/AthletesParser.swift.o",
+    "swiftmodule": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Main/AthletesParser~partial.swiftmodule",
+    "swift-dependencies": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Main/AthletesParser.swiftdeps"
+  },
   "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/Sources/Main/classification.swift": {
     "dependencies": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Main/classification.d",
     "object": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Sources/Main/classification.swift.o",
     "swiftmodule": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Main/classification~partial.swiftmodule",
     "swift-dependencies": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Main/classification.swiftdeps"
+  },
+  "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/Sources/Main/DataParser.swift": {
+    "dependencies": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Main/DataParser.d",
+    "object": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Sources/Main/DataParser.swift.o",
+    "swiftmodule": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Main/DataParser~partial.swiftmodule",
+    "swift-dependencies": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Main/DataParser.swiftdeps"
   },
   "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/Sources/Main/main.swift": {
     "dependencies": "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/.build/debug/Guide2DataMining.o/Main/main.d",
