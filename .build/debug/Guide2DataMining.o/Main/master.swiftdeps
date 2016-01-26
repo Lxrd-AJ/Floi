@@ -1,10 +1,10 @@
 version: "Apple Swift version 2.2-dev (LLVM 3ebdbb2c7e, Clang f66c5bb67b, Swift 42591f7cba)"
 options: "6ecd223f6ccd2972f558ea1451cf0c17"
-build_time: [507139726, 128761000]
+build_time: [507139976, 504152000]
 inputs:
-  "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/Sources/Main/AthletesParser.swift": [507139615, 0]
-  "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/Sources/Main/classification.swift": [507139164, 0]
-  "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/Sources/Main/DataParser.swift": [507139072, 0]
-  "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/Sources/Main/main.swift": [507139373, 0]
+  "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/Sources/Main/classification.swift": [507139974, 0]
+  "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/Sources/Main/main.swift": [507139969, 0]
   "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/Sources/Main/model_based_filtering.swift": [506879680, 0]
-  "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/Sources/Main/utilities.swift": [507139118, 0]
+  "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/Sources/Main/Parsers/AthletesParser.swift": [507139615, 0]
+  "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/Sources/Main/Parsers/DataParser.swift": [507139072, 0]
+  "/Users/AJ/Spikes/Artificial Intelligence/Guide To Data Mining/Sources/Main/Parsers/utilities.swift": [507139118, 0]

@@ -7,22 +7,22 @@ provides-member:
 - ["C4Main11Recommender", ""]
 provides-dynamic-lookup:
 depends-top-level:
-- "Recommender"
-- "Dictionary"
-- !private "*"
-- !private "+="
+- !private "-"
 - "String"
-- !private "FloatLiteralType"
-- !private "!="
+- "Int"
+- !private "+"
+- "Dictionary"
+- !private "/"
+- !private "&&"
+- !private "*"
 - !private "=="
 - !private "IntegerLiteralType"
-- "Int"
-- !private "/"
-- !private "+"
+- !private "+="
 - "Double"
-- !private "&&"
 - !private "++"
-- !private "-"
+- !private "FloatLiteralType"
+- !private "!="
+- "Recommender"
 depends-member:
 - !private ["Ps16AbsoluteValuable", "IntegerLiteralType"]
 - !private ["Ps16AbsoluteValuable", "Stride"]

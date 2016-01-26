@@ -7,23 +7,23 @@ provides-member:
 - ["C4Main10Classifier", ""]
 provides-dynamic-lookup:
 depends-top-level:
-- !private "zip"
-- !private "-"
 - "Double"
+- !private "IntegerLiteralType"
+- !private "=="
 - !private "Array"
 - !private "!="
-- !private "<"
+- !private "zip"
 - !private "..<"
+- "Classifier"
+- !private "%"
+- "DataParser"
+- "String"
+- !private "-"
 - !private "FloatLiteralType"
 - !private "abs"
 - !private "+"
-- "String"
-- !private "=="
-- "Classifier"
-- !private "IntegerLiteralType"
 - !private "/"
-- "DataParser"
-- !private "%"
+- !private "<"
 depends-member:
 - !private ["Ps16AbsoluteValuable", "IntegerLiteralType"]
 - !private ["Ps16AbsoluteValuable", "Stride"]

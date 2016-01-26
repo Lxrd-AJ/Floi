@@ -1,33 +1,28 @@
 ### Swift dependencies file v0 ###
 provides-top-level:
-- "ProgramError"
 - "Accuracy"
 - "test"
 - "accuracy"
 provides-nominal:
-- "O4Main12ProgramError"
 provides-member:
-- ["O4Main12ProgramError", ""]
 provides-dynamic-lookup:
 depends-top-level:
-- "IntegerLiteralType"
-- "String"
 - "*"
-- "test"
-- "=="
 - "Accuracy"
 - "print"
+- "test"
+- "String"
+- "FloatLiteralType"
+- !private "Classifier"
+- !private "=="
+- !private "+="
+- "IntegerLiteralType"
+- !private "/"
+- "UnicodeScalarType"
+- !private "AtheletesParser"
 - "accuracy"
 - "StringLiteralType"
-- "UnicodeScalarType"
-- "ErrorType"
-- !private "+="
 - "Double"
-- !private "AtheletesParser"
-- !private "/"
-- !private "Classifier"
-- "ProgramError"
-- "FloatLiteralType"
 depends-member:
 - !private ["Ps16AbsoluteValuable", "init"]
 - !private ["Ps9AnyObject", "classify"]
@@ -50,17 +45,14 @@ depends-member:
 - !private ["C4Main15AtheletesParser", "parseFile"]
 - !private ["Ps22BidirectionalIndexType", "Distance"]
 - !private ["Ps22BidirectionalIndexType", "IntegerLiteralType"]
-- !private ["Ps22BidirectionalIndexType", "hashValue"]
 - !private ["Ps21BitwiseOperationsType", "Distance"]
 - !private ["Ps21BitwiseOperationsType", "IntegerLiteralType"]
-- !private ["Ps21BitwiseOperationsType", "hashValue"]
 - !private ["Sb", "_getBuiltinLogicValue"]
 - ["Sb", "deinit"]
 - !private ["Ps25BooleanLiteralConvertible", "_getBuiltinLogicValue"]
 - !private ["Ps11BooleanType", "_getBuiltinLogicValue"]
 - !private ["Ps11CVarArgType", "Distance"]
 - !private ["Ps11CVarArgType", "IntegerLiteralType"]
-- !private ["Ps11CVarArgType", "hashValue"]
 - ["Ps11CVarArgType", "init"]
 - ["Vs9Character", "deinit"]
 - !private ["C4Main10Classifier", "classify"]
@@ -72,7 +64,6 @@ depends-member:
 - !private ["Ps14CollectionType", "count"]
 - !private ["Ps10Comparable", "Distance"]
 - !private ["Ps10Comparable", "IntegerLiteralType"]
-- !private ["Ps10Comparable", "hashValue"]
 - ["Ps10Comparable", "init"]
 - !private ["Ps28CustomDebugStringConvertible", "Generator"]
 - !private ["Ps28CustomDebugStringConvertible", "Index"]
@@ -88,7 +79,6 @@ depends-member:
 - !private ["Ps23CustomStringConvertible", "_Element"]
 - !private ["Ps23CustomStringConvertible", "_getBuiltinLogicValue"]
 - !private ["Ps23CustomStringConvertible", "count"]
-- !private ["Ps23CustomStringConvertible", "hashValue"]
 - ["Ps23CustomStringConvertible", "init"]
 - !private ["P4Main10DataParser", "init"]
 - !private ["P4Main10DataParser", "parseFile"]
@@ -96,32 +86,19 @@ depends-member:
 - !private ["Sd", "init"]
 - !private ["Ps9Equatable", "Distance"]
 - !private ["Ps9Equatable", "IntegerLiteralType"]
-- ["Ps9Equatable", "_code"]
-- ["Ps9Equatable", "_domain"]
 - !private ["Ps9Equatable", "_getBuiltinLogicValue"]
-- ["Ps9Equatable", "hashValue"]
 - ["Ps9Equatable", "init"]
-- ["Ps9Equatable", ""]
-- ["Ps9ErrorType", "_code"]
-- ["Ps9ErrorType", "_domain"]
-- ["Ps9ErrorType", "hashValue"]
-- ["Ps9ErrorType", ""]
 - ["Ps41ExtendedGraphemeClusterLiteralConvertible", "init"]
 - ["Sf", "deinit"]
 - !private ["Ps23FloatLiteralConvertible", "init"]
 - !private ["Ps17FloatingPointType", "init"]
 - !private ["Ps16ForwardIndexType", "Distance"]
 - !private ["Ps16ForwardIndexType", "IntegerLiteralType"]
-- !private ["Ps16ForwardIndexType", "hashValue"]
 - !private ["Ps13GeneratorType", "Element"]
 - !private ["Ps8Hashable", "Distance"]
 - !private ["Ps8Hashable", "IntegerLiteralType"]
-- ["Ps8Hashable", "_code"]
-- ["Ps8Hashable", "_domain"]
 - !private ["Ps8Hashable", "_getBuiltinLogicValue"]
-- ["Ps8Hashable", "hashValue"]
 - ["Ps8Hashable", "init"]
-- ["Ps8Hashable", ""]
 - !private ["Ps9Indexable", "Generator"]
 - !private ["Ps9Indexable", "Index"]
 - !private ["Ps9Indexable", "SubSequence"]
@@ -131,24 +108,19 @@ depends-member:
 - !private ["Si", "Distance"]
 - !private ["Si", "IntegerLiteralType"]
 - ["Si", "deinit"]
-- !private ["Si", "hashValue"]
 - ["Vs5Int16", "deinit"]
 - ["Vs5Int32", "deinit"]
 - ["Vs5Int64", "deinit"]
 - ["Vs4Int8", "deinit"]
 - !private ["Ps21IntegerArithmeticType", "Distance"]
 - !private ["Ps21IntegerArithmeticType", "IntegerLiteralType"]
-- !private ["Ps21IntegerArithmeticType", "hashValue"]
 - !private ["Ps25IntegerLiteralConvertible", "Distance"]
 - !private ["Ps25IntegerLiteralConvertible", "IntegerLiteralType"]
-- !private ["Ps25IntegerLiteralConvertible", "hashValue"]
 - !private ["Ps25IntegerLiteralConvertible", "init"]
 - !private ["Ps11IntegerType", "Distance"]
 - !private ["Ps11IntegerType", "IntegerLiteralType"]
-- !private ["Ps11IntegerType", "hashValue"]
 - !private ["Ps14MirrorPathType", "Distance"]
 - !private ["Ps14MirrorPathType", "IntegerLiteralType"]
-- !private ["Ps14MirrorPathType", "hashValue"]
 - ["Ps14MirrorPathType", "init"]
 - !private ["Ps21MutableCollectionType", "Generator"]
 - !private ["Ps21MutableCollectionType", "Index"]
@@ -174,14 +146,8 @@ depends-member:
 - ["CSo8NSString", "deinit"]
 - ["CSo8NSString", "init"]
 - ["Ps16OutputStreamType", "init"]
-- ["O4Main12ProgramError", "ChuckNorris"]
-- ["O4Main12ProgramError", "_code"]
-- ["O4Main12ProgramError", "_domain"]
-- ["O4Main12ProgramError", "deinit"]
-- ["O4Main12ProgramError", "hashValue"]
 - !private ["Ps21RandomAccessIndexType", "Distance"]
 - !private ["Ps21RandomAccessIndexType", "IntegerLiteralType"]
-- !private ["Ps21RandomAccessIndexType", "hashValue"]
 - !private ["Ps30RangeReplaceableCollectionType", "Generator"]
 - !private ["Ps30RangeReplaceableCollectionType", "Index"]
 - !private ["Ps30RangeReplaceableCollectionType", "SubSequence"]
@@ -195,15 +161,12 @@ depends-member:
 - !private ["Ps12SequenceType", "count"]
 - !private ["Ps17SignedIntegerType", "Distance"]
 - !private ["Ps17SignedIntegerType", "IntegerLiteralType"]
-- !private ["Ps17SignedIntegerType", "hashValue"]
 - !private ["Ps16SignedNumberType", "Distance"]
 - !private ["Ps16SignedNumberType", "IntegerLiteralType"]
-- !private ["Ps16SignedNumberType", "hashValue"]
 - !private ["Ps16SignedNumberType", "init"]
 - ["Ps10Streamable", "init"]
 - !private ["Ps10Strideable", "Distance"]
 - !private ["Ps10Strideable", "IntegerLiteralType"]
-- !private ["Ps10Strideable", "hashValue"]
 - !private ["Ps10Strideable", "init"]
 - ["SS", "init"]
 - ["Ps30StringInterpolationConvertible", "init"]
@@ -225,7 +188,6 @@ depends-member:
 - !private ["Ps31_BuiltinFloatLiteralConvertible", "init"]
 - !private ["Ps33_BuiltinIntegerLiteralConvertible", "Distance"]
 - !private ["Ps33_BuiltinIntegerLiteralConvertible", "IntegerLiteralType"]
-- !private ["Ps33_BuiltinIntegerLiteralConvertible", "hashValue"]
 - !private ["Ps33_BuiltinIntegerLiteralConvertible", "init"]
 - ["Ps32_BuiltinStringLiteralConvertible", "init"]
 - ["Ps37_BuiltinUTF16StringLiteralConvertible", "init"]
@@ -239,13 +201,10 @@ depends-member:
 - !private ["Ps24_DestructorSafeContainer", "count"]
 - !private ["Ps14_Incrementable", "Distance"]
 - !private ["Ps14_Incrementable", "IntegerLiteralType"]
-- !private ["Ps14_Incrementable", "hashValue"]
 - !private ["Ps22_IntegerArithmeticType", "Distance"]
 - !private ["Ps22_IntegerArithmeticType", "IntegerLiteralType"]
-- !private ["Ps22_IntegerArithmeticType", "hashValue"]
 - !private ["Ps12_IntegerType", "Distance"]
 - !private ["Ps12_IntegerType", "IntegerLiteralType"]
-- !private ["Ps12_IntegerType", "hashValue"]
 - !private ["Ps21_ObjectiveCBridgeable", "Distance"]
 - !private ["Ps21_ObjectiveCBridgeable", "Generator"]
 - !private ["Ps21_ObjectiveCBridgeable", "Index"]
@@ -254,11 +213,9 @@ depends-member:
 - !private ["Ps21_ObjectiveCBridgeable", "_Element"]
 - !private ["Ps21_ObjectiveCBridgeable", "_getBuiltinLogicValue"]
 - !private ["Ps21_ObjectiveCBridgeable", "count"]
-- !private ["Ps21_ObjectiveCBridgeable", "hashValue"]
 - ["Ps21_ObjectiveCBridgeable", "init"]
 - !private ["Ps22_RandomAccessAmbiguity", "Distance"]
 - !private ["Ps22_RandomAccessAmbiguity", "IntegerLiteralType"]
-- !private ["Ps22_RandomAccessAmbiguity", "hashValue"]
 - !private ["Ps12_Reflectable", "Distance"]
 - !private ["Ps12_Reflectable", "Generator"]
 - !private ["Ps12_Reflectable", "Index"]
@@ -267,11 +224,9 @@ depends-member:
 - !private ["Ps12_Reflectable", "_Element"]
 - !private ["Ps12_Reflectable", "_getBuiltinLogicValue"]
 - !private ["Ps12_Reflectable", "count"]
-- !private ["Ps12_Reflectable", "hashValue"]
 - ["Ps12_Reflectable", "init"]
 - !private ["Ps18_SignedIntegerType", "Distance"]
 - !private ["Ps18_SignedIntegerType", "IntegerLiteralType"]
-- !private ["Ps18_SignedIntegerType", "hashValue"]
 depends-nominal:
 - !private "Ps16AbsoluteValuable"
 - "Ps9AnyObject"
@@ -294,7 +249,6 @@ depends-nominal:
 - !private "P4Main10DataParser"
 - "Sd"
 - "Ps9Equatable"
-- "Ps9ErrorType"
 - "Ps41ExtendedGraphemeClusterLiteralConvertible"
 - "Sf"
 - !private "Ps23FloatLiteralConvertible"
@@ -324,7 +278,6 @@ depends-nominal:
 - "PSo14NSSecureCoding"
 - "CSo8NSString"
 - "Ps16OutputStreamType"
-- "O4Main12ProgramError"
 - !private "Ps21RandomAccessIndexType"
 - !private "Ps30RangeReplaceableCollectionType"
 - !private "Ps12SequenceType"
@@ -382,4 +335,4 @@ depends-external:
 - "/Library/Developer/Toolchains/swift-2.2-SNAPSHOT-2016-01-11-a.xctoolchain/usr/lib/swift/macosx/x86_64/Dispatch.swiftmodule"
 - "/Library/Developer/Toolchains/swift-2.2-SNAPSHOT-2016-01-11-a.xctoolchain/usr/lib/swift/macosx/x86_64/ObjectiveC.swiftmodule"
 - "/Library/Developer/Toolchains/swift-2.2-SNAPSHOT-2016-01-11-a.xctoolchain/usr/lib/swift/macosx/x86_64/CoreGraphics.swiftmodule"
-interface-hash: "4ed28518446ca0fa5cb8c425a6c7f4eb"
+interface-hash: "55a1bbc09fd98003d2ef6efe8a43569e"
