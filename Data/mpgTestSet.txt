@@ -1,3 +1,4 @@
+class	num	num	num	num	num	comment
 15	8	390.0	190.0	3850	8.5	amc ambassador dpl
 15	8	383.0	170.0	3563	10.0	dodge challenger se
 15	8	340.0	160.0	3609	8.0	plymouth 'cuda 340
