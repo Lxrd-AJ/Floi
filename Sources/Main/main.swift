@@ -29,3 +29,6 @@ print("Accuracy is \(accuracy * 100)%")
 
 accuracy = test( training:"Data/irisTrainingSet.data.txt", test:"Data/irisTestSet.data.txt", testName: "Iris", parser: IrisParser() )
 print("Accuracy is \(accuracy * 100)%")
+
+//Bucket.makeBuckets("Data/mpgTestSet.txt", bucketName:"mpgData", separator:"String", classColumn:0 )
+//Bucket.makeBuckets("Data/irisTestSet.data.txt", bucketName:"irisData", separator:"String", classColumn:4 )
