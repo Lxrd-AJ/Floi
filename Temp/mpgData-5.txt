@@ -1,0 +1,41 @@
+class	num	num	num	num	num	comment	
+25	4	151.0	88.00	2740	16.0	pontiac sunbird coupe	
+25	6	173.0	115.0	2700	12.9	oldsmobile omega brougham	
+25	4	112.0	88.00	2640	18.6	chevrolet cavalier wagon	
+25	4	151.0	90.00	2950	17.3	chevrolet camaro	
+25	4	97.00	46.00	1835	20.5	volkswagen 1131 deluxe sedan	
+25	8	350.0	125.0	3900	17.4	cadillac eldorado	
+25	4	116.0	81.00	2220	16.9	opel 1900	
+25	4	113.0	95.00	2278	15.5	toyota corona hardtop	
+20	6	225.0	110.0	3360	16.6	dodge aspen 6	
+20	6	232.0	100.0	2634	13.0	amc gremlin	
+20	8	305.0	140.0	4215	13.0	chevrolet chevelle malibu classic	
+20	4	140.0	72.00	2401	19.5	chevrolet vega	
+20	6	225.0	100.0	3651	17.7	dodge aspen se	
+20	6	250.0	105.0	3353	14.5	chevrolet nova	
+20	6	200.0	88.00	3060	17.1	ford granada gl	
+20	6	225.0	100.0	3630	17.7	plymouth volare custom	
+20	4	140.0	72.00	2408	19.0	chevrolet vega (sw)	
+20	6	156.0	122.0	2807	13.5	toyota mark ii	
+35	4	91.00	60.00	1800	16.4	honda civic cvcc	
+35	4	135.0	84.00	2370	13.0	dodge charger 2.2	
+35	4	72.00	69.00	1613	18.0	datsun 1200	
+35	4	105.0	63.00	2215	14.9	plymouth horizon 4	
+40	4	86.00	64.00	1875	16.4	plymouth champ	
+30	4	135.0	84.00	2525	16.0	dodge aries se	
+30	4	91.00	67.00	1965	15.7	honda civic (auto)	
+30	4	98.00	63.00	2051	17.0	chevrolet chevette	
+30	4	68.00	49.00	1867	19.5	fiat 128	
+30	6	145.0	76.00	3160	19.6	volvo diesel	
+30	4	97.00	71.00	1825	12.2	volkswagen rabbit	
+10	8	383.0	180.0	4955	11.5	dodge monaco (sw)	
+45	4	90.00	48.00	2085	21.7	vw rabbit c (diesel)	
+15	8	318.0	150.0	4237	14.5	plymouth fury gran sedan	
+15	6	250.0	100.0	3336	17.0	chevrolet nova	
+15	6	250.0	72.00	3432	21.0	mercury monarch	
+15	8	318.0	150.0	3755	14.0	dodge d100	
+15	6	250.0	100.0	3781	17.0	chevrolet chevelle malibu classic	
+15	8	302.0	130.0	4295	14.9	mercury cougar brougham	
+15	8	307.0	130.0	4098	14.0	chevrolet chevelle concours (sw)	
+15	8	440.0	215.0	4312	8.5	plymouth fury iii	
+15	8	400.0	150.0	3761	9.5	chevrolet monte carlo	

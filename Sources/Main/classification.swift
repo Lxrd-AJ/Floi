@@ -3,18 +3,48 @@ import Foundation
 
 class Classifier {
     var medianAndDeviation: [(Double,Double)] = []
-    var format: [String] = []
+    //var format: [String] = []
     var data: [(classification:String, vector:[Double], ignore:[String])] = []
+    let numOfBuckets = 10
 
-    init( filename:String, dataParser:DataParser ){
-        //read the file and Parse the Data into the required format
-        self.data = dataParser.parseFile(filename);
+    init( bucketPrefix:String, testBucketNumber:Int, dataParser:DataParser ){
+        //read in each file and Parse the Data into the required format from the buckets
+        for i in 0..<numOfBuckets {
+            if i == testBucketNumber { continue; }
+            let filename = "Temp/\(bucketPrefix)-\(i).txt"
+            self.data += dataParser.parseFile( filename )
+        }
+
         //Normalize the vectors in our data
         let vectors_data:[[Double]] = self.data.map({ $0.vector });
         let normalized_vectors = normalize( vectors_data );
         for i in 0..<normalized_vectors.count {
             self.data[i].vector = normalized_vectors[i];
         }
+
+        //Test
+        // print("\nTesting Bucket");
+        // let file = "Temp/\(bucketPrefix)-\(testBucketNumber).txt"
+        // let result = testBucket(file, parser:dataParser)
+        // print( result );
+    }
+
+    //Returns the Map of the test Results
+    func testBucket( bucketFileName:String , parser:DataParser ) -> [String:[String:Int]]{
+        var totals: [String:[String:Int]] = [:]
+        let data = parser.parseFile( bucketFileName );
+
+        for datum in data {
+            let realClass = datum.classification
+            let classifiedAs = self.classify( datum.vector )
+
+            if totals[realClass] == nil { totals[realClass] = [:] }
+            if totals[realClass]![classifiedAs] == nil { totals[realClass]![classifiedAs] = 0 }
+
+            totals[realClass]![classifiedAs]! += 1
+        }
+
+        return totals
     }
 
     func classify( vector:[Double] ) -> String {

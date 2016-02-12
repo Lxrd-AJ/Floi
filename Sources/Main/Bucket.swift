@@ -6,7 +6,7 @@ import Foundation
 class Bucket {
 
     //Make different Buckets to ensure each bucket contains an appropriate representation of the entire dataset
-    class func makeBuckets( filename:String, bucketName:String, separator:String, classColumn:Int ) -> Void {
+    class func makeBuckets( filename:String, bucketName:String, classColumn:Int ) -> Void {
         let numOfBuckets = 10
         var buckets: [Int:[[String]]] = [:]
         var data:[String:[[String]]] = [:]
@@ -15,7 +15,7 @@ class Bucket {
             let contentsOfFile: String = try String(contentsOfFile:filename, encoding:NSUTF8StringEncoding );
             let lines: [String] = contentsOfFile.componentsSeparatedByString("\n").filter({ $0 != "" })
             let _contents: [[String]] = lines.map({ $0.componentsSeparatedByString("\t") })
-            let _ = _contents[0]
+            let format = _contents[0]
             let contents = Array( _contents[1..<_contents.count])
 
             //Separate the data into categories
@@ -43,16 +43,19 @@ class Bucket {
             //Save the buckets to disk
             for bNo in 0..<numOfBuckets {
                 let contents = buckets[bNo]
-                var file = ""
+                var file = format.reduce("", combine:{ return $0 + $1 + "\t"}) + "\n"
                 for line in contents! { //contents is an array of lines
                     file += line.reduce("", combine:{ return $0 + $1 + "\t" }) + "\n"
                 }
-                let filename = "Temp/\(bucketName)\(bNo).txt"
+                let filename = "Temp/\(bucketName)-\(bNo).txt"
                 do{
                     try file.writeToFile( filename, atomically:false, encoding: NSUTF8StringEncoding )
                 }catch{ print("Error: Failed to save file \(filename)"); }
             }
 
-        }catch{ print(error); }
+        }catch{
+            print("Bucket.swift: An Error occurred while reading file \(filename)");
+            print(error);
+        }
     }
 }

@@ -1,0 +1,43 @@
+class	num	num	num	num	num	comment	
+25	3	70.00	100.0	2420	12.5	mazda rx-7 gs	
+25	4	115.0	95.00	2694	15.0	audi 100ls	
+25	6	173.0	110.0	2725	12.6	chevrolet citation	
+25	4	120.0	97.00	2506	14.5	toyouta corona mark ii (sw)	
+25	4	97.00	88.00	2130	14.5	datsun pl510	
+25	4	140.0	88.00	2870	18.1	ford fairmont	
+25	4	140.0	92.00	2572	14.9	capri ii	
+25	4	97.00	60.00	1834	19.0	volkswagen model 111	
+20	4	130.0	102.0	3150	15.7	volvo 245	
+20	6	200.0	85.00	2587	16.0	ford maverick	
+20	6	199.0	97.00	2774	15.5	amc hornet	
+20	3	80.00	110.0	2720	13.5	mazda rx-4	
+20	6	225.0	110.0	3620	18.7	dodge aspen	
+20	6	232.0	100.0	2789	15.0	amc gremlin	
+20	4	122.0	85.00	2310	18.5	ford pinto	
+20	4	121.0	115.0	2795	15.7	saab 99gle	
+20	6	225.0	85.00	3465	16.6	chrysler lebaron salon	
+20	6	232.0	100.0	2914	16.0	amc gremlin	
+35	6	168.0	132.0	2910	11.4	datsun 280-zx	
+35	4	86.00	65.00	1975	15.2	maxda glc deluxe	
+35	4	91.00	53.00	1795	17.4	honda civic	
+35	4	85.00	70.00	1945	16.8	datsun f-10 hatchback	
+40	4	89.00	62.00	2050	17.3	toyota tercel	
+30	4	107.0	72.00	2290	17.0	honda accord	
+30	4	119.0	82.00	2720	19.4	chevy s-10	
+30	4	71.00	65.00	1836	21.0	toyota corolla 1200	
+30	4	135.0	84.00	2385	12.9	plymouth reliant	
+30	4	89.00	62.00	1845	15.3	vokswagen rabbit	
+30	4	90.00	70.00	1937	14.2	vw rabbit	
+30	4	111.0	80.00	2155	14.8	buick opel isuzu deluxe	
+10	8	318.0	210.0	4382	13.5	dodge d200	
+10	8	400.0	167.0	4906	12.5	ford country	
+45	4	90.00	48.00	2335	23.7	vw dasher (diesel)	
+15	8	304.0	150.0	3672	11.5	amc ambassador sst	
+15	8	350.0	165.0	4209	12.0	chevrolet impala	
+15	8	350.0	145.0	4440	14.0	chevrolet bel air	
+15	6	231.0	110.0	3907	21.0	buick century	
+15	8	400.0	190.0	4325	12.2	chrysler cordoba	
+15	8	455.0	225.0	4425	10.0	pontiac catalina	
+15	8	360.0	170.0	4654	13.0	plymouth custom suburb	
+15	8	455.0	225.0	3086	10.0	buick estate wagon (sw)	
+15	8	350.0	155.0	4502	13.5	buick lesabre custom	

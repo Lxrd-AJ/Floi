@@ -26,7 +26,7 @@ func computeNearestNeighbour( item:String , itemVector:[Double], items:[String:[
 func readFile( path:String , encoding: NSStringEncoding = NSUTF8StringEncoding ) -> String? {
     guard NSFileManager().fileExistsAtPath( path ) else{ return nil }
     do{ return try String( contentsOfFile:path, encoding:encoding ); }
-    catch{ print(error) }
+    catch{ print("An error occured whilst reading file, Error: \(error)") }
     return nil;
 }
 

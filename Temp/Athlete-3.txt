@@ -1,0 +1,4 @@
+comment	class	num	num	
+Brittainey Raven	Basketball	72	162	
+Irina Miketenko	Track	63	106	
+Rebecca Tunney	Gymnastics	58	77	
