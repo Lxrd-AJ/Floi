@@ -19,7 +19,7 @@ class Recommender {
                     if item != item2 {
                         self.frequencies[item]![item2] = 0
                         self.deviations[item]![item2] = 0.0
-                        self.frequencies[item]![item2]!++
+                        self.frequencies[item]![item2]! += 1
                         self.deviations[item]![item2]! += rating - rating2
                     }
                 }

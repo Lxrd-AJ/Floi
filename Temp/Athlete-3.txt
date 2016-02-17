@@ -1,4 +1,4 @@
 comment	class	num	num	
-Brittainey Raven	Basketball	72	162	
-Irina Miketenko	Track	63	106	
-Rebecca Tunney	Gymnastics	58	77	
+Shanna Crossley	Basketball	70	155	
+Tatyana Petrova	Track	63	108	
+Asuka Teramoto	Gymnastics	54	66	

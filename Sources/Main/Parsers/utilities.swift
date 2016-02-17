@@ -12,6 +12,17 @@ func manhattan( vector1:[Double], vector2:[Double] ) -> Double {
     return abs( Array(zip(vector1,vector2)).map({ $0.0 - $0.1 }).reduce(0, combine:+) )
 }
 
+func help (){
+    let num = "num"
+    let cl = "class"
+    var result = ""
+    for _ in 0..<8 {
+    	result += "\(num)\t"
+    }
+    result += "\(cl)"
+    print(result)
+}
+
 //Creates a sorted list of items based on their distances to item
 func computeNearestNeighbour( item:String , itemVector:[Double], items:[String:[Double]] ) -> [Double] {
     var distances: [Double] = []

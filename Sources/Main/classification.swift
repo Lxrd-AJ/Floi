@@ -3,11 +3,12 @@ import Foundation
 
 class Classifier {
     var medianAndDeviation: [(Double,Double)] = []
-    //var format: [String] = []
     var data: [(classification:String, vector:[Double], ignore:[String])] = []
+    var k: Int //NB: Should be a let constant but atm it generates an Error Undefined symbols for architecture x86_64:
     let numOfBuckets = 10
 
-    init( bucketPrefix:String, testBucketNumber:Int, dataParser:DataParser ){
+    init( bucketPrefix:String, testBucketNumber:Int, dataParser:DataParser, k:Int = 1 ){ //By default if K not specified
+        self.k = k
         //read in each file and Parse the Data into the required format from the buckets
         for i in 0..<numOfBuckets {
             if i == testBucketNumber { continue; }
@@ -21,12 +22,6 @@ class Classifier {
         for i in 0..<normalized_vectors.count {
             self.data[i].vector = normalized_vectors[i];
         }
-
-        //Test
-        // print("\nTesting Bucket");
-        // let file = "Temp/\(bucketPrefix)-\(testBucketNumber).txt"
-        // let result = testBucket(file, parser:dataParser)
-        // print( result );
     }
 
     //Returns the Map of the test Results
@@ -48,7 +43,25 @@ class Classifier {
     }
 
     func classify( vector:[Double] ) -> String {
-        return nearestNeighbour( normalizeVector(vector) )
+        return kNearestNeigbour( normalizeVector(vector) )
+        //return nearestNeighbour( normalizeVector(vector) )
+    }
+
+    func kNearestNeigbour( vector:[Double] ) -> String {
+        //Map a tuple (current entry in self.data, manhattan distance) and sort the returned tuple
+        let neighbours = self.data.map({ ($0,manhattan($0.vector,vector2:vector)) }).sort({ $0.1 < $1.1 }).prefix(self.k)
+        //Implement the voting system for the neighbours
+        var votes:[String:Int] = [:]
+        for neigbour in neighbours {
+            let _class = neigbour.0.classification
+            if votes[_class] == nil { votes[_class] = 1 }
+            else{ votes[_class]! += 1 }
+        }
+        //Keys sorted by highest votes, Convert the dictionary to an array of tuples and sorted
+        let voteTuples: [(String,Int)] = votes.keys.map({ ($0,votes[$0]!) }).sort({ $0.1 > $1.1 }) //highest first
+
+        //TODO: Account for the situtation where there is a tie in the votes
+        return voteTuples.first!.0
     }
 
     func nearestNeighbour( vector:[Double] ) -> String {

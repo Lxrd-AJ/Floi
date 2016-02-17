@@ -1,4 +1,4 @@
 comment	class	num	num	
-Shavonte Zellous	Basketball	70	155	
-Valeria Straneo	Track	66	97	
-Gabby Douglas	Gymnastics	49	90	
+Chen Nan	Basketball	78	204	
+Irina Miketenko	Track	63	106	
+Viktoria Komova	Gymnastics	61	76	

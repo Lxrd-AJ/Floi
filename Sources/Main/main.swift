@@ -22,7 +22,7 @@ func test( training training:String, test:String, testName:String, parser:DataPa
     return Double(accuracy) / Double(testData.count)
 }
 
-func tenFoldCrossValidation( filename:String, bucketPrefix:String, classColumn:Int, parser:DataParser ){
+func tenFoldCrossValidation( filename:String, bucketPrefix:String, classColumn:Int, parser:DataParser, k:Int = 1 ){
     var results: [String:[String:Int]] = [:]
     let numOfBuckets = 10
 
@@ -30,7 +30,7 @@ func tenFoldCrossValidation( filename:String, bucketPrefix:String, classColumn:I
     Bucket.makeBuckets( filename, bucketName:bucketPrefix, classColumn:classColumn )
 
     for i in 0..<numOfBuckets {
-        let classifier = Classifier( bucketPrefix:bucketPrefix, testBucketNumber:i, dataParser:parser );
+        let classifier = Classifier( bucketPrefix:bucketPrefix, testBucketNumber:i, dataParser:parser, k:k );
         let testFile = "Temp/\(bucketPrefix)-\(i).txt"
         let testBucketResults = classifier.testBucket( testFile, parser:parser );
 
@@ -42,8 +42,7 @@ func tenFoldCrossValidation( filename:String, bucketPrefix:String, classColumn:I
             }
         }
     }//end for loop
-    //for (key,value) in results { print("\(key)\t\(value)") } //results[key]
-    //Pretty Print the results
+
     let categories: [String] = results.keys.sort();
     var header = "\t"
     var subheader = "\t+"
@@ -51,7 +50,8 @@ func tenFoldCrossValidation( filename:String, bucketPrefix:String, classColumn:I
     var correct = 0
     var count = 0
 
-    print( "\n\tClassified as:" )
+    //MARK - Drawing the confusion matrix
+    print( "\n\(bucketPrefix) using \(k) nearest neighbour(s) \tClassified as:" )
     for category in categories { header += "\(category)\t"; subheader += "--------+"; }
     print("\(header)\n\(subheader)");
 
@@ -67,7 +67,7 @@ func tenFoldCrossValidation( filename:String, bucketPrefix:String, classColumn:I
         print(row);
     }
     print(subheader)
-    print("\n\(Double((correct * 100)/total)) % correct")
+    print("\n\(Double((correct * 100)/total))% correct")
     print("Total of \(total) instances");
 }
 
@@ -85,4 +85,9 @@ func tenFoldCrossValidation( filename:String, bucketPrefix:String, classColumn:I
 //Bucket.makeBuckets("Data/mpgTestSet.txt", bucketName:"mpgData", classColumn:0 )
 
 
-tenFoldCrossValidation( "Data/mpgData.txt", bucketPrefix:"mpgData", classColumn:0, parser:Parser() );
+//tenFoldCrossValidation( "Data/mpgData.txt", bucketPrefix:"mpgData", classColumn:0, parser:Parser() );
+tenFoldCrossValidation( "Data/pima.txt", bucketPrefix:"pima", classColumn:8, parser:Parser() );
+tenFoldCrossValidation( "Data/pima.txt", bucketPrefix:"pima", classColumn:8, parser:Parser(), k:5 );
+
+tenFoldCrossValidation( "Data/pimaSmall.txt", bucketPrefix:"pimaSmall", classColumn:8, parser:Parser() );
+tenFoldCrossValidation( "Data/pimaSmall.txt", bucketPrefix:"pimaSmall", classColumn:8, parser:Parser(), k:5 );
