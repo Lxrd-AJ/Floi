@@ -1,3 +1,0 @@
-comment	class	num	num	
-Nikki Blue	Basketball	68	163	
-Kara Goucher	Track	67	123	

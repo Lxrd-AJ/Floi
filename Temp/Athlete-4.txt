@@ -1,4 +1,0 @@
-comment	class	num	num	
-Shavonte Zellous	Basketball	70	155	
-Helalia Johannes	Track	65	99	
-Gabby Douglas	Gymnastics	49	90	

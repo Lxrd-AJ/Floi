@@ -1,4 +1,0 @@
-comment	class	num	num	
-Brittainey Raven	Basketball	72	162	
-Rene Kalmer	Track	70	108	
-Linlin Deng	Gymnastics	54	68	

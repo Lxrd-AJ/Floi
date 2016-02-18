@@ -1,4 +1,0 @@
-comment	class	num	num	
-Nakia Sanford	Basketball	76	200	
-Tiki Gelana	Track	65	106	
-Qiushuang Huang	Gymnastics	61	95	

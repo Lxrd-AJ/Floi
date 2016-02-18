@@ -1,4 +1,0 @@
-comment	class	num	num	
-Jennifer Lacy	Basketball	75	175	
-Valeria Straneo	Track	66	97	
-Rebecca Tunney	Gymnastics	58	77	

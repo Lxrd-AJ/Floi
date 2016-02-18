@@ -1,4 +1,0 @@
-comment	class	num	num	
-Chen Nan	Basketball	78	204	
-Irina Miketenko	Track	63	106	
-Viktoria Komova	Gymnastics	61	76	

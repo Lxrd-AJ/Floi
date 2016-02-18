@@ -1,4 +1,0 @@
-comment	class	num	num	
-Shanna Crossley	Basketball	70	155	
-Tatyana Petrova	Track	63	108	
-Asuka Teramoto	Gymnastics	54	66	
