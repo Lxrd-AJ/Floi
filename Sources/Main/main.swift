@@ -69,8 +69,34 @@ func tenFoldCrossValidation( filename:String, bucketPrefix:String, classColumn:I
     print(subheader)
     print("\n\(Double((correct * 100)/total))% correct")
     print("Total of \(total) instances");
+    //kappaStatistics( results );
 }
 
+func kappaStatistics( results: [String:[String:Int]] ){
+    let total = results.keys.reduce( 0, combine:{ (total,rowKey) in
+        let row = results[rowKey]!
+        return total + row.keys.reduce(0, combine:{ (total,key) in total + row[key]! })
+    })
+    var kappaResults: [String:[String:Int]] = [:]
+    var keyToCount: [String:Int] = [:]
+
+    //Calculate the ratio for each key
+    for (key,row) in results {
+        for (rKey,value) in row { //NB: Map doesnt seem to be woking for dictionaries, strange 😩
+            if keyToCount[rKey] == nil { keyToCount[rKey] = 0 }
+            keyToCount[rKey]! += value;
+        }
+    }
+
+    //TODO: Continue kappa statistics for classifier here
+    //convert to ratios
+    // let keyToRatio = keyToCount.keys.reduce( [String:Double](), combine:{ (ratioMap:[String:Double],currentKey:String) in
+    //     return ratioMap[currentKey] = currentKey / total
+    // })
+    print( keyToCount )
+    print( keyToRatio )
+    //print( results )
+}
 
 
 // accuracy = test( training:"Data/athletesTrainingSet.txt", test:"Data/athletesTestSet.txt", testName: "Athlete", parser: AtheletesParser(),classColumn:1 )
