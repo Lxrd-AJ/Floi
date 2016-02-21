@@ -1,6 +1,6 @@
 import Foundation
 
-/*
+/**
     A Bucket class for Data Stratification to use for cross validation,
 */
 class Bucket {

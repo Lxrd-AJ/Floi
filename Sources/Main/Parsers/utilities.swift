@@ -1,5 +1,3 @@
-//TODO: Write a function for computeNearestNeighbour
-
 import Foundation
 
 enum Choice {
@@ -13,10 +11,10 @@ func manhattan( vector1:[Double], vector2:[Double] ) -> Double {
 }
 
 func help (){
-    let num = "num"
+    let num = "attr"
     let cl = "class"
     var result = ""
-    for _ in 0..<8 {
+    for _ in 0..<4 {
     	result += "\(num)\t"
     }
     result += "\(cl)"

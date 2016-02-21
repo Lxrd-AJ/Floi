@@ -1,6 +1,16 @@
+/**
+* @Author: AJ Ibraheem <AJ>
+* @Date:   2016-02-20T09:17:17+00:00
+* @Email:  ibraheemaj@icloud.com
+* @Last modified by:   AJ
+* @Last modified time: 2016-02-20T09:18:07+00:00
+*/
 
 import Foundation
-
+/**
+    A Nearest neigbour classifier.
+    It uses the k Nearest Neighbour classifier approach
+*/
 class Classifier {
     var medianAndDeviation: [(Double,Double)] = []
     var data: [(classification:String, vector:[Double], ignore:[String])] = []
