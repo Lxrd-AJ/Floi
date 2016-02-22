@@ -42,7 +42,7 @@ class BayesClassifier {
         })
     }()
     lazy var conditionalProbability: [Classification:[Column:[Attribute:Probability]]] = {
-        //Compute the conditional probability for the Hypothesis given Data
+        //Compute the conditional probability for the Hypothesis given Data p(h|D)
         //Column number is being used to preserve integrity of each attribute as they might repeat across columns
         //Probs i could have gone functional and used `reduce` ? 🤔🤔🤔
         var result:[Classification:[Column:[Attribute:Probability]]] = [:]

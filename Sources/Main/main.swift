@@ -73,39 +73,56 @@ func tenFoldCrossValidation( filename:String, bucketPrefix:String, classColumn:I
     print(subheader)
     print("\n\(Double((correct * 100)/total))% correct")
     print("Total of \(total) instances");
-    //kappaStatistics( results );
+    kappaStatistics( results );
 }
 
-    /**
-        Function to test the accuracy of the classifier using Kappa statistics
-        - parameter: results: A Dictionary containing the results of the classification of the
-                    classifer to test
-    */
-// func kappaStatistics( results: [String:[String:Int]] ){
-//     let total = results.keys.reduce( 0, combine:{ (total,rowKey) in
-//         let row = results[rowKey]!
-//         return total + row.keys.reduce(0, combine:{ (total,key) in total + row[key]! })
-//     })
-//     var kappaResults: [String:[String:Int]] = [:]
-//     var keyToCount: [String:Int] = [:]
-//
-//     //Calculate the ratio for each key
-//     for (key,row) in results {
-//         for (rKey,value) in row { //NB: Map doesnt seem to be woking for dictionaries, strange 😩
-//             if keyToCount[rKey] == nil { keyToCount[rKey] = 0 }
-//             keyToCount[rKey]! += value;
-//         }
-//     }
-//
-//     //TODO: Continue kappa statistics for classifier here
-//     //convert to ratios
-//     // let keyToRatio = keyToCount.keys.reduce( [String:Double](), combine:{ (ratioMap:[String:Double],currentKey:String) in
-//     //     return ratioMap[currentKey] = currentKey / total
-//     // })
-//     //print( keyToCount )
-//     //print( keyToRatio )
-//     //print( results )
-// }
+/**
+    Function to test the accuracy of the classifier using Kappa statistics, it works by comparing the results of an actual
+    classifier to that of a random classifier. It gets the proportion of each category and uses the proportion to fill in
+    the rows for each classification of a category
+    - parameter: results: A Dictionary containing the results of the classification of the
+                classifer to test
+    - note :
+        kappaResults contains an approximation as in some cases the percentage proportion might be 0.7199999999 and that might
+        result in an equated value less than 1
+*/
+func kappaStatistics( results: [String:[String:Int]] ){
+    let total = results.keys.reduce( 0, combine:{ (total,rowKey) in
+        let row = results[rowKey]!
+        return total + row.keys.reduce(0, combine:{ (total,key) in total + row[key]! })
+    })
+    var kappaResults: [String:[String:Int]] = [:]
+    var keyToCount: [String:Int] = [:]
+    //Anonymous function to sum the results of a row
+    func sumRow( dictionary:[String:Int] ) -> Int {
+        return dictionary.keys.reduce(0, combine:{ (total,key) in total + dictionary[key]! })
+    }
+
+    //Calculate the ratio for each key
+    for (key,row) in results {
+        for (rKey,value) in row { //NB: Map doesnt seem to be woking for dictionaries, strange 😩
+            if keyToCount[rKey] == nil { keyToCount[rKey] = 0 }
+            keyToCount[rKey]! += value;
+        }
+    }
+
+    //convert to ratios
+    let keyToRatio = keyToCount.keys.reduce( [String:Double](), combine:{ (ratioMap:[String:Double],currentKey:String) in
+        var temp = ratioMap
+        temp[currentKey] = Double(keyToCount[currentKey]!) / Double(total)
+        return temp
+    })
+
+    for (category,row) in results {
+        kappaResults[category] = [:]
+        for (expectedCategory,_) in row {
+            kappaResults[category]![expectedCategory] = Int( keyToRatio[expectedCategory]! * Double(sumRow(row)) )
+        }
+    }
+    print(kappaResults);
+    //TODO: Continue kappa statistics for classifier here 5-22
+
+}
 
 /**
     Classifying data without cross-validation
@@ -124,12 +141,12 @@ func tenFoldCrossValidation( filename:String, bucketPrefix:String, classColumn:I
 /**
     Classifying data using 10 fold cross validation
 */
-//tenFoldCrossValidation( "Data/mpgData.txt", bucketPrefix:"mpgData", classColumn:0, parser:Parser() );
-// tenFoldCrossValidation( "Data/pima.txt", bucketPrefix:"pima", classColumn:8, parser:Parser() );
-// tenFoldCrossValidation( "Data/pima.txt", bucketPrefix:"pima", classColumn:8, parser:Parser(), k:5 );
-//
-// tenFoldCrossValidation( "Data/pimaSmall.txt", bucketPrefix:"pimaSmall", classColumn:8, parser:Parser() );
-// tenFoldCrossValidation( "Data/pimaSmall.txt", bucketPrefix:"pimaSmall", classColumn:8, parser:Parser(), k:5 );
+tenFoldCrossValidation( "Data/mpgData.txt", bucketPrefix:"mpgData", classColumn:0, parser:Parser() );
+tenFoldCrossValidation( "Data/pima.txt", bucketPrefix:"pima", classColumn:8, parser:Parser() );
+tenFoldCrossValidation( "Data/pima.txt", bucketPrefix:"pima", classColumn:8, parser:Parser(), k:5 );
+
+tenFoldCrossValidation( "Data/pimaSmall.txt", bucketPrefix:"pimaSmall", classColumn:8, parser:Parser() );
+tenFoldCrossValidation( "Data/pimaSmall.txt", bucketPrefix:"pimaSmall", classColumn:8, parser:Parser(), k:5 );
 
 
 /**
@@ -137,4 +154,5 @@ func tenFoldCrossValidation( filename:String, bucketPrefix:String, classColumn:I
 */
 Bucket.makeBuckets( "Data/iHealth.txt", bucketName:"iHealth", classColumn:4 )
 let classifier = BayesClassifier( bucketPrefix:"iHealth", testBucketNumber:9, dataParser:BayesParser())
-print( classifier.classify( ["health", "moderate", "moderate", "yes"] ) )
+print("\nClassification based on the Fitness Store")
+print( classifier.classify( ["health", "moderate", "moderate", "yes"] ) ) //6-35
