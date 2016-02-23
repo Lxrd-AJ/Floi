@@ -90,6 +90,31 @@ class BayesClassifier {
     }
 
     /**
+        A Stub method usually used in cross validation, parses and classifies the data in the current bucket
+        and returns the result
+        - parameter bucketFileName: The URL of the bucket to read data from
+        - parameter parser: The Parser to use when parsing the data read in bucket `bucketFileName`
+        - note :
+            **This method would be deprecated soon when BayesClassifier and Classifier get merged or refactored
+    */
+    func testBucket( bucketFileName:String , parser:BayesParser ) -> [String:[String:Int]]{
+        var totals: [String:[String:Int]] = [:]
+        let data = parser.parseFile( bucketFileName );
+
+        for datum in data {
+            let realClass = datum.classification
+            let classifiedAs = self.classify( datum.attribute ) //**We are still using attribute and not vectors for now**
+
+            if totals[realClass] == nil { totals[realClass] = [:] }
+            if totals[realClass]![classifiedAs] == nil { totals[realClass]![classifiedAs] = 0 }
+
+            totals[realClass]![classifiedAs]! += 1
+        }
+
+        return totals
+    }
+
+    /**
         Makes a classification based on the `attributeVector` by computing the maximum a posteriori
         probability of each Hypothesis and returning the maximum probability
         - note: Presently `Attribute` is a string and as a result, the classifier would not classify data

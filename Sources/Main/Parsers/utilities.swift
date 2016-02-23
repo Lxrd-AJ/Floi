@@ -13,11 +13,11 @@ func manhattan( vector1:[Double], vector2:[Double] ) -> Double {
 func help (){
     let num = "attr"
     let cl = "class"
-    var result = ""
-    for _ in 0..<4 {
+    var result = "\(cl)\t"
+    for _ in 0..<16 {
     	result += "\(num)\t"
     }
-    result += "\(cl)"
+    //result +=
     print(result)
 }
 
