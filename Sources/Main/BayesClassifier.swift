@@ -90,6 +90,21 @@ class BayesClassifier {
     }
 
     /**
+        Probability Density function calculating P(x|y) i.e probability of x given y
+        - parameter mean: The average of all data in the **sample set**
+        - parameter standardDeviation: **standardDeviation here is actually the sample standard deviation**
+        - parameter x: The Hypothesis we are testing
+        - note:
+            * Infix operator ^^ declared in utilities.swift which is the power function
+            * M_E is a constant equals to Euler's constant 𝑒 in Swift ofcourse :)
+            * M_PI is the equivalent of Pi π
+    */
+    func probabilityDensity( mean mean:Double, standardDeviation:Double, x:Double ) -> Double {
+        let ePart = M_E ^^ ( (-((x - mean) ^^ 2)) / (2 * (standardDeviation ^^ 2)) )
+        return (1.0/(sqrt(2 * M_PI)*standardDeviation)) * ePart
+    }
+
+    /**
         A Stub method usually used in cross validation, parses and classifies the data in the current bucket
         and returns the result
         - parameter bucketFileName: The URL of the bucket to read data from

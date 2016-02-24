@@ -39,6 +39,15 @@ func readFile( path:String , encoding: NSStringEncoding = NSUTF8StringEncoding )
     return nil;
 }
 
+/**
+    Helper function to help compute the power of a radix
+    - note: Only works on Double **not Int** as a use case hasnt risen yet
+*/
+infix operator ^^ {}
+func ^^ (radix:Double, power:Double) -> Double {
+    return pow(radix,power)
+}
+
 //Swift extensions to enable shuffling
 extension CollectionType {
     func shuffle() -> [Generator.Element] {

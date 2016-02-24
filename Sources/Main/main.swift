@@ -158,7 +158,7 @@ func kappaStatistics( results: [String:[String:Int]] ){
     }
 
     //Calculate the ratio for each key
-    for (key,row) in results {
+    for (_,row) in results {
         for (rKey,value) in row { //NB: Map doesnt seem to be woking for dictionaries, strange 😩
             if keyToCount[rKey] == nil { keyToCount[rKey] = 0 }
             keyToCount[rKey]! += value;
@@ -221,3 +221,7 @@ print( classifier.classify( ["health", "moderate", "moderate", "yes"] ) )
 print("\nClassification based on the Voting Data: Republican vs Democrats")
 //print( classifier.classify( ["health", "moderate", "moderate", "yes"] ) )
 tenFoldCrossValidation_Bayes( "Data/houseVotes.txt", bucketPrefix:"houseVotes", classColumn:0, parser:BayesParser() )
+
+
+let r = classifier.probabilityDensity(mean:72.875, standardDeviation:9.804, x:132);
+print("\n\nTesting Probability Density Function\t\(r)")
