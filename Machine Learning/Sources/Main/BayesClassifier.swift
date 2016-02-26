@@ -17,6 +17,7 @@ import Foundation
         * Another extension could be to use typealias(es) to simplify the dictionary definitions e.g counts[Category:[Column:[DataItem:Count]]]
     - todo
         - [x] Use a parser that inherits from the DataParser protocol instead and modify the data parser protocol to include attributes:[String] alongside vectors
+        - [x] Following the examples from the book, let totals `totalsColumn` be based off numericValues `numericValuesColumn`
 */
 class BayesClassifier {
 
@@ -28,9 +29,11 @@ class BayesClassifier {
     let numOfBuckets = 10
 
     var classes:[String:Int] = [:] //Counts the occurrence of each class or category
-    var counts:[String:[Int:[String:Int]]] = [:] //tracks the occurrence of each attribute values in the different columns
+    var counts:[String:[Int:[String:Int]]] = [:] //tracks the occurrence of each attribute that are not numeric values in the different columns
     var data: [(classification:String, attribute:[String], vector:[Double], ignore:[String])] = []
     var total:Int { return data.count } //track the number of rows we processed
+    var numericValuesColumn:[Classification:[Column:[Double]]] = [:] //the numeric values for each column mapped by the classes
+    var totalsColumn:[Classification:[Column:Double]] = [:] //the sum total of all vaues for the current column mapped by classes
 
     lazy var priorProbability: [String:Double] = {
         //Calculates the Prior Probability p(h) for every category in classes
@@ -56,6 +59,10 @@ class BayesClassifier {
         }
         return result
     }()
+    
+    //TODO: Implement 6-64
+    lazy var sampleStandardDeviation:[Classification:[Column:Double]] = { return [:] }()
+    lazy var mean:[Classification:[Column:Double]] = { return [:] }()
 
     /**
         Trains the classifier and builds an internal model
@@ -70,22 +77,35 @@ class BayesClassifier {
         }
 
         //Process the entire collection and fill up the classes and counts variables
-        _ = self.data.map({ datum in
-            if classes[datum.classification] == nil {
-                classes[datum.classification] = 0
-                counts[datum.classification] = [:]
+        _ = self.data.map({ rowData in
+            if classes[rowData.classification] == nil {
+                classes[rowData.classification] = 0
+                counts[rowData.classification] = [:]
             }
-            classes[datum.classification]! += 1
-            //Process each attribute/vector for the current datum
+            classes[rowData.classification]! += 1
+            
+            let category = rowData.classification
+            //Process each attribute/vector for the current rowData
             var column:Int = 0
-            for attrib in datum.attribute {
+            for attrib in rowData.attribute {
                 column += 1
-                let category = datum.classification
                 if counts[category]![column] == nil { counts[category]![column] = [:] }
                 if counts[category]![column]![attrib] == nil { counts[category]![column]![attrib] = 0 }
                 counts[category]![column]![attrib]! += 1
             }
+            //Process each non-numeric attribute for the rowData/row 
+            column = 0
+            for vector in rowData.vector {
+                column += 1
+                if totalsColumn[category] == nil { totalsColumn[category] = [:] }
+                if totalsColumn[category]![column] == nil { totalsColumn[category]![column] = 0 }
+                if numericValuesColumn[category] == nil { numericValuesColumn[category] = [:] }
+                if numericValuesColumn[category]![column] == nil { numericValuesColumn[category]![column] = [] }
+                numericValuesColumn[category]![column]! += [vector]
+                totalsColumn[category]![column]! += vector
+            }
         })
+        
     }
 
     /**

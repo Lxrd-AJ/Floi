@@ -199,6 +199,7 @@ print( classifier.classify( ["health", "moderate", "moderate", "yes"] ) )
 print("\nClassification based on the Voting Data: Republican vs Democrats")
 //print( classifier.classify( ["health", "moderate", "moderate", "yes"] ) )
 tenFoldCrossValidation_Bayes( "Data/houseVotes.txt", bucketPrefix:"houseVotes", classColumn:0 )
+tenFoldCrossValidation_Bayes( "Data/pimaSmall.txt", bucketPrefix:"pimaSmall", classColumn:0 );
 
 
 let r = classifier.probabilityDensity(mean:72.875, standardDeviation:9.804, x:132);
