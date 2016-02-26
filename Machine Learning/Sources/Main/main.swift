@@ -1,6 +1,7 @@
 import Foundation
 
 typealias Accuracy = Double
+typealias Data = [(classification:String, attribute:[String], vector:[Double], ignore:[String])]
 var accuracy = 0.0
 
 func test( training training:String, test:String, testName:String, parser:DataParser, classColumn:Int ) -> Accuracy {
@@ -13,7 +14,7 @@ func test( training training:String, test:String, testName:String, parser:DataPa
     Bucket.makeBuckets( training, bucketName:testName, classColumn:classColumn )//NB: Only Training used as source for Buckets
     let classifier = Classifier( bucketPrefix:testName, testBucketNumber:3, dataParser:parser )
 
-    let testData:[(classification:String, vector:[Double], ignore:[String])] = parser.parseFile( test );
+    let testData:Data = parser.parseFile( test );
     var accuracy = 0;
     for data in testData {
         let guess = classifier.classify( data.vector );
@@ -49,44 +50,16 @@ func tenFoldCrossValidation( filename:String, bucketPrefix:String, classColumn:I
         }
     }//end for loop
 
-    let categories: [String] = results.keys.sort();
-    var header = "\t"
-    var subheader = "\t+"
-    var total = 0
-    var correct = 0
-    var count = 0
-
-    //MARK - Drawing the confusion matrix
-    print( "\n\(bucketPrefix) using \(k) nearest neighbour(s) \tClassified as:" )
-    for category in categories { header += "\(category)\t"; subheader += "--------+"; }
-    print("\(header)\n\(subheader)");
-
-    for actualCategory in categories {
-        var row = "\(actualCategory)\t|";
-        _ = categories.map({ expectedCategory in
-            if results[actualCategory]![expectedCategory] != nil { count = results[actualCategory]![expectedCategory]! }
-            else{ count = 0; }
-            row += "\(count)\t|"
-            total += count
-            if expectedCategory == actualCategory { correct += count }
-        })
-        print(row);
-    }
-    print(subheader)
-    print("\n\(Double((correct * 100)/total))% correct")
-    print("Total of \(total) instances");
-    kappaStatistics( results );
+    drawConfusionMatrix( results )
 }
 
 /**
     Performs 10 fold cross validation
-    - warning:
-        **Do not use this method**
     - todo:
-        * Implement 10 fold cross validation on the BayesClassifier
+        - [ ] Encapsulate the similarities between the crossValidation Functions and avoid redundancy
     - parameter classColumn : The column where the class/category of data, counting starts from 0
 */
-func tenFoldCrossValidation_Bayes( filename:String, bucketPrefix:String, classColumn:Int, parser:BayesParser ){
+func tenFoldCrossValidation_Bayes( filename:String, bucketPrefix:String, classColumn:Int ){
     var results: [String:[String:Int]] = [:]
     let numOfBuckets = 10
 
@@ -94,9 +67,9 @@ func tenFoldCrossValidation_Bayes( filename:String, bucketPrefix:String, classCo
     Bucket.makeBuckets( filename, bucketName:bucketPrefix, classColumn:classColumn )
 
     for i in 0..<numOfBuckets {
-        let classifier = BayesClassifier( bucketPrefix:bucketPrefix, testBucketNumber:i, dataParser:BayesParser())
+        let classifier = BayesClassifier( bucketPrefix:bucketPrefix, testBucketNumber:i, dataParser:Parser())
         let testFile = "Temp/\(bucketPrefix)-\(i).txt"
-        let testBucketResults = classifier.testBucket( testFile, parser:parser );
+        let testBucketResults = classifier.testBucket( testFile, parser:Parser() );
 
         for (key,value) in testBucketResults {
             if results[key] == nil { results[key] = [:] }
@@ -106,18 +79,22 @@ func tenFoldCrossValidation_Bayes( filename:String, bucketPrefix:String, classCo
             }
         }
     }//end for loop
+    
+    drawConfusionMatrix( results )
+}
 
+func drawConfusionMatrix( results: [String:[String:Int]] ){
     let categories: [String] = results.keys.sort();
     var header = "\t\t"
     var subheader = "\t\t+"
     var total = 0
     var correct = 0
     var count = 0
-
+    
     //MARK - Drawing the confusion matrix
     for category in categories { header += "\(category)\t"; subheader += "--------+"; }
     print("\(header)\n\(subheader)");
-
+    
     for actualCategory in categories {
         var row = "\(actualCategory)\t|";
         _ = categories.map({ expectedCategory in
@@ -133,6 +110,7 @@ func tenFoldCrossValidation_Bayes( filename:String, bucketPrefix:String, classCo
     print("\n\(Double((correct * 100)/total))% correct")
     print("Total of \(total) instances");
     kappaStatistics( results );
+
 }
 
 /**
@@ -212,15 +190,15 @@ tenFoldCrossValidation( "Data/pimaSmall.txt", bucketPrefix:"pimaSmall", classCol
     Testing the Bayes Classifier
 */
 Bucket.makeBuckets( "Data/iHealth.txt", bucketName:"iHealth", classColumn:4 )
-let classifier = BayesClassifier( bucketPrefix:"iHealth", testBucketNumber:9, dataParser:BayesParser())
+let classifier = BayesClassifier( bucketPrefix:"iHealth", testBucketNumber:9, dataParser:Parser())
 print("\nClassification based on the Fitness Store")
 print( classifier.classify( ["health", "moderate", "moderate", "yes"] ) )
 
 // Bucket.makeBuckets( "Data/houseVotes.txt", bucketName:"houseVotes", classColumn:0 )
-// let classifier2 = BayesClassifier( bucketPrefix:"houseVotes", testBucketNumber:9, dataParser:BayesParser())
+// let classifier2 = BayesClassifier( bucketPrefix:"houseVotes", testBucketNumber:9 )
 print("\nClassification based on the Voting Data: Republican vs Democrats")
 //print( classifier.classify( ["health", "moderate", "moderate", "yes"] ) )
-tenFoldCrossValidation_Bayes( "Data/houseVotes.txt", bucketPrefix:"houseVotes", classColumn:0, parser:BayesParser() )
+tenFoldCrossValidation_Bayes( "Data/houseVotes.txt", bucketPrefix:"houseVotes", classColumn:0 )
 
 
 let r = classifier.probabilityDensity(mean:72.875, standardDeviation:9.804, x:132);

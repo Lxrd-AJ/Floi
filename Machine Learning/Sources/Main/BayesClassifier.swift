@@ -16,8 +16,7 @@ import Foundation
         * This BayesClassifier seems to be having lots of similarites to the Classifier class, a todo might be to inherit from the classifier class
         * Another extension could be to use typealias(es) to simplify the dictionary definitions e.g counts[Category:[Column:[DataItem:Count]]]
     - todo
-        Use a parser that inherits from the DataParser protocol instead and modify the data parser protocol
-        to include attributes:[String] alongside vectors
+        - [x] Use a parser that inherits from the DataParser protocol instead and modify the data parser protocol to include attributes:[String] alongside vectors
 */
 class BayesClassifier {
 
@@ -62,7 +61,7 @@ class BayesClassifier {
         Trains the classifier and builds an internal model
         - parameter testBucketNumber: The Bucket number to use to test, counting starts from 0
     */
-    init( bucketPrefix:String, testBucketNumber:Int, dataParser:BayesParser ){
+    init( bucketPrefix:String, testBucketNumber:Int, dataParser:DataParser ){
         //Read in the data
         for i in 0..<numOfBuckets {
             if i == testBucketNumber { continue }
@@ -90,7 +89,8 @@ class BayesClassifier {
     }
 
     /**
-        Probability Density function calculating P(x|y) i.e probability of x given y
+        Probability Density function calculating P(x|y) i.e probability of x given y, very useful for classifying attributes with
+        numeric values 
         - parameter mean: The average of all data in the **sample set**
         - parameter standardDeviation: **standardDeviation here is actually the sample standard deviation**
         - parameter x: The Hypothesis we are testing
@@ -112,7 +112,7 @@ class BayesClassifier {
         - note :
             **This method would be deprecated soon when BayesClassifier and Classifier get merged or refactored
     */
-    func testBucket( bucketFileName:String , parser:BayesParser ) -> [String:[String:Int]]{
+    func testBucket( bucketFileName:String , parser:DataParser ) -> [String:[String:Int]]{
         var totals: [String:[String:Int]] = [:]
         let data = parser.parseFile( bucketFileName );
 

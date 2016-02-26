@@ -13,7 +13,7 @@ import Foundation
 */
 class Classifier {
     var medianAndDeviation: [(Double,Double)] = []
-    var data: [(classification:String, vector:[Double], ignore:[String])] = []
+    var data: [(classification:String, attribute:[String], vector:[Double], ignore:[String])] = []
     var k: Int //NB: Should be a let constant but atm it generates an Error Undefined symbols for architecture x86_64:
     let numOfBuckets = 10
 
@@ -58,7 +58,7 @@ class Classifier {
     }
 
     func kNearestNeigbour( vector:[Double] ) -> String {
-        //Map a tuple (current entry in self.data, manhattan distance) and sort the returned tuple
+        //Map a tuple (current entry in self.data, manhattan distance) and sort the returned tuple, sort using elem 1 which is manhattan distance
         let neighbours = self.data.map({ ($0,manhattan($0.vector,vector2:vector)) }).sort({ $0.1 < $1.1 }).prefix(self.k)
         //Implement the voting system for the neighbours
         var votes:[String:Int] = [:]
