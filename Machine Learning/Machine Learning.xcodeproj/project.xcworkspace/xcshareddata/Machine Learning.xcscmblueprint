@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "48EC040E6126712F3C478EADB5DAC2EDE32B20AE",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "F9BEA68E9C0DF638F1010E8E0C3C903AB4B0F9BC" : 0,
+    "48EC040E6126712F3C478EADB5DAC2EDE32B20AE" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "505CA26A-D931-421E-8381-51CC061ABE0F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "F9BEA68E9C0DF638F1010E8E0C3C903AB4B0F9BC" : "Guide%20To%20Data%20Mining\/Machine%20Learning\/Packages\/SwiftyTextTable-0.2.1\/",
+    "48EC040E6126712F3C478EADB5DAC2EDE32B20AE" : "Guide%20To%20Data%20Mining\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Machine Learning",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Machine Learning\/Machine Learning.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Lxrd-AJ\/Floi.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "48EC040E6126712F3C478EADB5DAC2EDE32B20AE"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/scottrhoyt\/SwiftyTextTable.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F9BEA68E9C0DF638F1010E8E0C3C903AB4B0F9BC"
+    }
+  ]
+}

@@ -119,7 +119,6 @@ class BayesClassifier {
         for datum in data {
             let realClass = datum.classification
             let classifiedAs = self.classify( datum.attribute ) //**We are still using attribute and not vectors for now**
-
             if totals[realClass] == nil { totals[realClass] = [:] }
             if totals[realClass]![classifiedAs] == nil { totals[realClass]![classifiedAs] = 0 }
 

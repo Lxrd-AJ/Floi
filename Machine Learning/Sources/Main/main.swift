@@ -225,3 +225,4 @@ tenFoldCrossValidation_Bayes( "Data/houseVotes.txt", bucketPrefix:"houseVotes", 
 
 let r = classifier.probabilityDensity(mean:72.875, standardDeviation:9.804, x:132);
 print("\n\nTesting Probability Density Function\t\(r)")
+
