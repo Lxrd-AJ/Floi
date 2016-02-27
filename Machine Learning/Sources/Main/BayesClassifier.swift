@@ -59,10 +59,33 @@ class BayesClassifier {
         }
         return result
     }()
+    lazy var mean:[Classification:[Column:Double]] = {
+        return self.totalsColumn.keys.reduce([:], combine:{ (mean:[Classification:[Column:Double]],category:Classification) in
+            var result = mean //making it mutable 
+            result[category] = [:]
+            for( column,columnTotals ) in self.totalsColumn[category]! {
+                result[category]![column] = Double(columnTotals) / Double(self.classes[category]!)
+            }
+            return result
+        })
+    }()
+    lazy var sampleStandardDeviation:[Classification:[Column:Double]] = {
+        return self.numericValuesColumn.keys.reduce([:], combine:{ (ssd:[Classification:[Column:Double]],category:Classification) in
+            var _ssd = ssd
+            _ssd[category] = [:] //NB: The Categories are unique
+            for (column,values) in self.numericValuesColumn[category]! {
+                let mean = self.mean[category]![column]!
+                let sumSquareDifference = values.reduce(Double(0.0), combine:{ (cumulative,value) in
+                    print("Mean \(mean), value \(value)\t\((value - mean)^^2)\tCumulative:\(cumulative + (value - mean)^^2)")
+                    return cumulative + ((value - mean)^^2)
+                })
+                print( sumSquareDifference )
+                _ssd[category]![column] = sqrt( sumSquareDifference / Double(self.classes[category]! - 1) )
+            }
+            return _ssd
+        })
+    }()
     
-    //TODO: Implement 6-64
-    lazy var sampleStandardDeviation:[Classification:[Column:Double]] = { return [:] }()
-    lazy var mean:[Classification:[Column:Double]] = { return [:] }()
 
     /**
         Trains the classifier and builds an internal model
@@ -104,9 +127,8 @@ class BayesClassifier {
                 numericValuesColumn[category]![column]! += [vector]
                 totalsColumn[category]![column]! += vector
             }
-        })
-        
-    }
+        })//end map
+    }//end init
 
     /**
         Probability Density function calculating P(x|y) i.e probability of x given y, very useful for classifying attributes with
