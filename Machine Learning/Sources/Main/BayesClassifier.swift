@@ -76,10 +76,8 @@ class BayesClassifier {
             for (column,values) in self.numericValuesColumn[category]! {
                 let mean = self.mean[category]![column]!
                 let sumSquareDifference = values.reduce(Double(0.0), combine:{ (cumulative,value) in
-                    print("Mean \(mean), value \(value)\t\((value - mean)^^2)\tCumulative:\(cumulative + (value - mean)^^2)")
                     return cumulative + ((value - mean)^^2)
                 })
-                print( sumSquareDifference )
                 _ssd[category]![column] = sqrt( sumSquareDifference / Double(self.classes[category]! - 1) )
             }
             return _ssd
@@ -160,7 +158,7 @@ class BayesClassifier {
 
         for datum in data {
             let realClass = datum.classification
-            let classifiedAs = self.classify( datum.attribute ) //**We are still using attribute and not vectors for now**
+            let classifiedAs = self.classify( datum.attribute, numericVector:datum.vector )
             if totals[realClass] == nil { totals[realClass] = [:] }
             if totals[realClass]![classifiedAs] == nil { totals[realClass]![classifiedAs] = 0 }
 
@@ -173,11 +171,13 @@ class BayesClassifier {
     /**
         Makes a classification based on the `attributeVector` by computing the maximum a posteriori
         probability of each Hypothesis and returning the maximum probability
+        - todo: 
+            - [x] Add a numericVector parameter to the function
         - note: Presently `Attribute` is a string and as a result, the classifier would not classify data
             with Integer/Double attributes **This needs to be improved**
         - parameter attributeVector: The array of attributes to base the classification on
     */
-    func classify( attributeVector:[Attribute] ) -> Classification {
+    func classify( attributeVector:[Attribute], numericVector:[Double] ) -> Classification {
         return self.priorProbability.keys
             .reduce( [(Classification,Probability)](), combine:{
                 (results:[(Classification,Probability)], category:String) in
@@ -190,10 +190,17 @@ class BayesClassifier {
                         column += 1
                     }else{ probability = 0 }
                 })
+                column = 1
+                _ = numericVector.map({ numeric in
+                    let mean = self.mean[category]![column]!
+                    let standardDeviation = self.sampleStandardDeviation[category]![column]!
+                    probability *= probabilityDensity( mean:mean, standardDeviation:standardDeviation, x:numeric )
+                    column += 1 
+                })
                 temp += [(category,probability)]
                 return temp
             })
-            .sort({ $0.1 > $1.1 })
+            .sort({ $0.1 > $1.1 }) //Sort based on probability in tuple
             .first!.0 // 0 is Classification
     }
 }

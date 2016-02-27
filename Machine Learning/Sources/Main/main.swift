@@ -63,6 +63,7 @@ func tenFoldCrossValidation_Bayes( filename:String, bucketPrefix:String, classCo
     var results: [String:[String:Int]] = [:]
     let numOfBuckets = 10
 
+    print("Performing Cross validation on \(bucketPrefix)")
     //Make the Buckets
     Bucket.makeBuckets( filename, bucketName:bucketPrefix, classColumn:classColumn )
 
@@ -177,14 +178,14 @@ func kappaStatistics( results: [String:[String:Int]] ){
 
 /**
     Classifying data using 10 fold cross validation
-*/
+
 //tenFoldCrossValidation( "Data/mpgData.txt", bucketPrefix:"mpgData", classColumn:0, parser:Parser() );
 //tenFoldCrossValidation( "Data/pima.txt", bucketPrefix:"pima", classColumn:8, parser:Parser() );
 tenFoldCrossValidation( "Data/pima.txt", bucketPrefix:"pima", classColumn:8, parser:Parser(), k:5 );
 
 tenFoldCrossValidation( "Data/pimaSmall.txt", bucketPrefix:"pimaSmall", classColumn:8, parser:Parser() );
 tenFoldCrossValidation( "Data/pimaSmall.txt", bucketPrefix:"pimaSmall", classColumn:8, parser:Parser(), k:5 );
-
+*/
 
 /**
     Testing the Bayes Classifier
@@ -192,7 +193,7 @@ tenFoldCrossValidation( "Data/pimaSmall.txt", bucketPrefix:"pimaSmall", classCol
 Bucket.makeBuckets( "Data/iHealth.txt", bucketName:"iHealth", classColumn:4 )
 let classifier = BayesClassifier( bucketPrefix:"iHealth", testBucketNumber:9, dataParser:Parser())
 print("\nClassification based on the Fitness Store")
-print( classifier.classify( ["health", "moderate", "moderate", "yes"] ) )
+print( classifier.classify( ["health", "moderate", "moderate", "yes"], numericVector:[] ) )
 
 // Bucket.makeBuckets( "Data/houseVotes.txt", bucketName:"houseVotes", classColumn:0 )
 // let classifier2 = BayesClassifier( bucketPrefix:"houseVotes", testBucketNumber:9 )
@@ -200,6 +201,7 @@ print("\nClassification based on the Voting Data: Republican vs Democrats")
 //print( classifier.classify( ["health", "moderate", "moderate", "yes"] ) )
 tenFoldCrossValidation_Bayes( "Data/houseVotes.txt", bucketPrefix:"houseVotes", classColumn:0 )
 tenFoldCrossValidation_Bayes( "Data/pimaSmall.txt", bucketPrefix:"pimaSmall", classColumn:0 );
+tenFoldCrossValidation_Bayes( "Data/pima.txt", bucketPrefix:"pima", classColumn:0 );
 
 
 let r = classifier.probabilityDensity(mean:72.875, standardDeviation:9.804, x:132);
