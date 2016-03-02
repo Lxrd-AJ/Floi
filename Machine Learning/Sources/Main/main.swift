@@ -176,6 +176,10 @@ func kappaStatistics( results: [String:[String:Int]] ){
 
 //Bucket.makeBuckets("Data/mpgTestSet.txt", bucketName:"mpgData", classColumn:0 )
 
+
+
+
+
 /**
     Classifying data using 10 fold cross validation
 
@@ -187,23 +191,39 @@ tenFoldCrossValidation( "Data/pimaSmall.txt", bucketPrefix:"pimaSmall", classCol
 tenFoldCrossValidation( "Data/pimaSmall.txt", bucketPrefix:"pimaSmall", classColumn:8, parser:Parser(), k:5 );
 */
 
+
+
+
+
 /**
     Testing the Bayes Classifier
 */
-Bucket.makeBuckets( "Data/iHealth.txt", bucketName:"iHealth", classColumn:4 )
-let classifier = BayesClassifier( bucketPrefix:"iHealth", testBucketNumber:9, dataParser:Parser())
-print("\nClassification based on the Fitness Store")
-print( classifier.classify( ["health", "moderate", "moderate", "yes"], numericVector:[] ) )
+//Bucket.makeBuckets( "Data/iHealth.txt", bucketName:"iHealth", classColumn:4 )
+//let classifier = BayesClassifier( bucketPrefix:"iHealth", testBucketNumber:9, dataParser:Parser())
+//print("\nClassification based on the Fitness Store")
+//print( classifier.classify( ["health", "moderate", "moderate", "yes"], numericVector:[] ) )
+//
+//// Bucket.makeBuckets( "Data/houseVotes.txt", bucketName:"houseVotes", classColumn:0 )
+//// let classifier2 = BayesClassifier( bucketPrefix:"houseVotes", testBucketNumber:9 )
+//print("\nClassification based on the Voting Data: Republican vs Democrats")
+////print( classifier.classify( ["health", "moderate", "moderate", "yes"] ) )
+//tenFoldCrossValidation_Bayes( "Data/houseVotes.txt", bucketPrefix:"houseVotes", classColumn:0 )
+//tenFoldCrossValidation_Bayes( "Data/pimaSmall.txt", bucketPrefix:"pimaSmall", classColumn:0 );
+//tenFoldCrossValidation_Bayes( "Data/pima.txt", bucketPrefix:"pima", classColumn:0 );
+//
+//
+//let r = classifier.probabilityDensity(mean:72.875, standardDeviation:9.804, x:132);
+//print("\n\nTesting Probability Density Function\t\(r)")
 
-// Bucket.makeBuckets( "Data/houseVotes.txt", bucketName:"houseVotes", classColumn:0 )
-// let classifier2 = BayesClassifier( bucketPrefix:"houseVotes", testBucketNumber:9 )
-print("\nClassification based on the Voting Data: Republican vs Democrats")
-//print( classifier.classify( ["health", "moderate", "moderate", "yes"] ) )
-tenFoldCrossValidation_Bayes( "Data/houseVotes.txt", bucketPrefix:"houseVotes", classColumn:0 )
-tenFoldCrossValidation_Bayes( "Data/pimaSmall.txt", bucketPrefix:"pimaSmall", classColumn:0 );
-tenFoldCrossValidation_Bayes( "Data/pima.txt", bucketPrefix:"pima", classColumn:0 );
 
 
-let r = classifier.probabilityDensity(mean:72.875, standardDeviation:9.804, x:132);
-print("\n\nTesting Probability Density Function\t\(r)")
+
+
+/**
+    Testing the Bayes Text Classifier
+*/
+let bayesParser = BayesTextParser( stopWordsPath:"Data/20news-bydate/stopwords174.txt", documentsPath:"Data/20news-bydate/20news-bydate-train" )
+for (cat,fileURLs) in bayesParser.categories {
+    print("\(cat)\t\(fileURLs.count) files")
+}
 

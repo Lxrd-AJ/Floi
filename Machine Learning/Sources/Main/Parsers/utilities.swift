@@ -66,3 +66,14 @@ extension MutableCollectionType where Index == Int {
         }
     }
 }
+
+//Checking if a directory exists
+extension NSFileManager {
+    func isDirectory( path:String ) -> Bool {
+        var isDir: ObjCBool = false
+        if NSFileManager.defaultManager().fileExistsAtPath( path, isDirectory:&isDir ){
+            if isDir { return true }
+        }
+        return false
+    }
+}
