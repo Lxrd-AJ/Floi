@@ -223,7 +223,8 @@ tenFoldCrossValidation( "Data/pimaSmall.txt", bucketPrefix:"pimaSmall", classCol
     Testing the Bayes Text Classifier
 */
 let bayesParser = BayesTextParser( stopWordsPath:"Data/20news-bydate/stopwords174.txt", documentsPath:"Data/20news-bydate/20news-bydate-train" )
-for (cat,fileURLs) in bayesParser.categories {
-    print("\(cat)\t\(fileURLs.count) files")
-}
+let bayesTextClassifier = BayesTextClassifier( trainingDirectory:"Data/20news-bydate/20news-bydate-train",stopWordsPath:"Data/20news-bydate/stopwords174.txt" )
+//for (cat,fileURLs) in bayesParser.categories {
+//    print("\(cat)\t\(fileURLs.count) files")
+//}
 
