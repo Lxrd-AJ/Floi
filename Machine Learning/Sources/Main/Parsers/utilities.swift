@@ -48,6 +48,16 @@ func ^^ (radix:Double, power:Double) -> Double {
     return pow(radix,power)
 }
 
+/**
+ Helper function to join 2 dictionaries together
+ - note: reference http://stackoverflow.com/a/24052094/2468129
+ */
+func += <KeyType, ValueType> (inout left: Dictionary<KeyType, ValueType>, right: Dictionary<KeyType, ValueType>) {
+    for (k, v) in right {
+        left.updateValue(v, forKey: k)
+    }
+}
+
 //Swift extensions to enable shuffling
 extension CollectionType {
     func shuffle() -> [Generator.Element] {

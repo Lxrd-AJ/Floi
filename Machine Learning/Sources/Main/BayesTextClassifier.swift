@@ -27,27 +27,50 @@ class BayesTextClassifier {
 
         //Train the Classifier
         for( category, fileURLs ) in parser.categories {
-            _ = self.train( fileURLs, category:category )
+            print(category)
+            _ = self.train( fileURLs, category:category, stopWords:parser.stopWords )
         }
     }
     
     /**
      Populates the classifier's vocabulary with the words read in from the `dataURLs`
+     - todo:
+        [ ] Some whitespace characters are still escaping through the filtering `$0.stringByTrimmingCharactersInSet(.whitespaceCharacterSet())` doesnt seem to be getting rid of them
      */
-    func train( dataURLs:[NSURL], category:String ) -> (counts:[Word:Int],total:Int){
+    func train( dataURLs:[NSURL], category:String, stopWords:[String] ) -> (vocabulary:[Word:Int],total:Int){
         //var counts:[Word:Int] = [:]
         var total = 0
         var vocabulary: [Word:Int] = [:]
         _ = dataURLs.map({ fileURL in
             if let contentsOfFile = readFile( fileURL.path! ){
-                //TODO: Continue Here 
+                //Filtering and cleaning of the data
                 let tokens = contentsOfFile.componentsSeparatedByCharactersInSet( .whitespaceAndNewlineCharacterSet() )
                     .filter({ $0 != "" })
+                    .filter({ !stopWords.contains($0) })
+                    .map({ $0.stringByTrimmingCharactersInSet(.whitespaceCharacterSet()) })
+                    .map({ $0.stringByTrimmingCharactersInSet(.punctuationCharacterSet()) })
+                    .map({ $0.stringByTrimmingCharactersInSet(.symbolCharacterSet()) })
+                    .map({ $0.stringByTrimmingCharactersInSet(NSCharacterSet.alphanumericCharacterSet().invertedSet) })
                     .map({ $0.lowercaseString })
-                vocabulary = tokens.reduce([:], combine:{})
+                //Count the occurence of each word and total words parsed
+                var _vocabulary = tokens.reduce([:], combine:{ (corpus:[Word:Int],token:Word) in
+                    var _corpus = corpus
+                    if( _corpus[token] == nil ){ _corpus[token] = 0 }
+                    _corpus[token]! += 1
+                    total += 1
+                    return _corpus
+                })
+                //Strip words from the vocabulary that don't occur at least 3 times
+                //note: Join the dictionaries together not replace
+                vocabulary += _vocabulary.keys.reduce([:], combine:{ (corpus:[Word:Int],token:Word) in
+                    var _corpus = corpus
+                    let count = _vocabulary[token]!
+                    if( count > 3 ){ _corpus[token] = count }
+                    return _corpus
+                })
             }else{ print("Failed to read URL") }
         })
-        
+        print(vocabulary)
         return (vocabulary,total)
     }
 }
