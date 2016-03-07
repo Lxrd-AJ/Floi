@@ -13,6 +13,8 @@ import Foundation
  for each hypothesis for the current word. 
     * It loads in data from the BayesTextParser and trains itself with all the words in files for each subdirectory 
     * It then computes the probability for each word
+ - warning 
+    * Some Files are failing to read
  */
 class BayesTextClassifier {
     
@@ -21,15 +23,40 @@ class BayesTextClassifier {
     
     let parser:BayesTextParser
     var probability:[Category:[Word:Double]] = [:]
+    var totals:[Category:Int] = [:]
     
+    /**
+     - todo
+        [ ] Verify the probability calculation being performed here
+     */
     init( trainingDirectory:String, stopWordsPath:String ){
         parser = BayesTextParser( stopWordsPath:stopWordsPath, documentsPath:trainingDirectory )
 
         //Train the Classifier
         for( category, fileURLs ) in parser.categories {
-            print(category)
-            _ = self.train( fileURLs, category:category, stopWords:parser.stopWords )
-        }
+            print("\(category)")
+            let (vocabulary,total) = self.train( fileURLs, category:category, stopWords:parser.stopWords )
+            self.totals[category] = total
+            print("Totals length \(total)")
+            print("Vocabulary length \(vocabulary.keys.count)")
+            //Calculate the probability
+            print("Computing Probabilities ....")
+            self.probability[category] = [:]
+            let denominator = total + (vocabulary.keys.count)
+            for (word,wordCount) in vocabulary {
+                print("Word \(word)")
+                print("Probability \(Double(wordCount+1)/Double(denominator))")
+                print("numerator \(wordCount+1) \nDenominator \(denominator)\n")
+                self.probability[category]![word] = Double(wordCount+1)/Double(denominator)
+            }
+        }//end for
+        
+        //TEST 
+        print( probability["rec.motorcycles"]!["god"] )
+        print( probability["soc.religion.christian"]!["god"] )
+        print( probability["rec.motorcycles"]!["the"] )
+        print( probability["soc.religion.christian"]!["the"] )
+        
     }
     
     /**
@@ -57,7 +84,7 @@ class BayesTextClassifier {
                     var _corpus = corpus
                     if( _corpus[token] == nil ){ _corpus[token] = 0 }
                     _corpus[token]! += 1
-                    total += 1
+                    total += 1 //We are using the actual total of words including the words that occur less than 3 times
                     return _corpus
                 })
                 //Strip words from the vocabulary that don't occur at least 3 times
@@ -68,9 +95,8 @@ class BayesTextClassifier {
                     if( count > 3 ){ _corpus[token] = count }
                     return _corpus
                 })
-            }else{ print("Failed to read URL") }
+            }else{ print("Failed to read URL whilst in training function") }
         })
-        print(vocabulary)
         return (vocabulary,total)
     }
 }
