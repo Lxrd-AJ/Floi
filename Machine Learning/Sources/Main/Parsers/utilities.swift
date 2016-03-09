@@ -52,11 +52,11 @@ func ^^ (radix:Double, power:Double) -> Double {
  Helper function to join 2 dictionaries together
  - note: reference http://stackoverflow.com/a/24052094/2468129
  */
-func += <KeyType, ValueType> (inout left: Dictionary<KeyType, ValueType>, right: Dictionary<KeyType, ValueType>) {
-    for (k, v) in right {
-        left.updateValue(v, forKey: k)
-    }
-}
+//func += <KeyType, ValueType> (inout left: Dictionary<KeyType, ValueType>, right: Dictionary<KeyType, ValueType>) {
+//    for (k, v) in right {
+//        left.updateValue(v, forKey: k)
+//    }
+//}
 
 //Swift extensions to enable shuffling
 extension CollectionType {
@@ -85,5 +85,39 @@ extension NSFileManager {
             if isDir { return true }
         }
         return false
+    }
+}
+
+/**
+ Immuable Helper function to merge two dictionaries, it returns a copy that contains the updated values for each key in both dictionaries.
+ It sums the values in cases where they have the same keys
+ */
+extension Dictionary where Value:IntegerLiteralConvertible, Key: StringLiteralConvertible {
+    func merge( rightDict: Dictionary<Key,Value> ) -> Dictionary<Key,Value> {
+        var mutableCopy = self
+        for( key,value) in rightDict {
+            if mutableCopy[key] == nil { mutableCopy.updateValue( value, forKey:key ) }
+            else{
+                if let leftValue = mutableCopy[key] as? Int, rightValue = value as? Int {
+                    mutableCopy.updateValue( (leftValue + rightValue) as! Value, forKey:key )
+                }
+            }
+//            if let key = (leftDict[key] as? String), value = (value as? Int) {
+//                if mutableCopy[key] == nil { mutableCopy.updateValue( value, forKey:key ) }
+//                else{
+//                    let v = mutableCopy[key]! + value
+//                    mutableCopy.updateValue( v, forKey:key )
+//                }
+//
+//// , mutableCopy = (mutableCopy as? [String:Int])    [String:Int]
+////                if mutableCopy[key] == nil { mutableCopy[key] = value }
+////                else{
+////                    mutableCopy[key]! += value
+////                    //                let v1 = mutableCopy[key]!
+////                    //                mutableCopy[key] = v1 += value
+////                }
+//            }
+        }
+        return mutableCopy
     }
 }

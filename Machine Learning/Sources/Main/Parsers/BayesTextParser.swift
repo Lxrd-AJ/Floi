@@ -16,7 +16,7 @@ class BayesTextParser {
     
     var stopWords: [String] = []
     var directoryContentsURL: [NSURL] = [] //The URLs for all the files in the current training/test directory 
-    lazy var categories: [String:[NSURL]] = {
+    lazy var categories: [String:[NSURL]] = { //The categories and their respective file URLs
         return self.directoryContentsURL.reduce([:], combine:{ (map:[String:[NSURL]], url:NSURL) in
             var _map = map
             do{ _map[url.lastPathComponent!] = try NSFileManager.defaultManager().contentsOfDirectoryAtURL(url, includingPropertiesForKeys: nil, options: [.SkipsHiddenFiles])
@@ -27,7 +27,7 @@ class BayesTextParser {
     
     init( stopWordsPath:String, documentsPath:String ){
         //1. Read in the stop words 
-        if let contentsOfFile = readFile( stopWordsPath ) {
+        if let contentsOfFile = readFile( stopWordsPath, encoding:NSISOLatin1StringEncoding ) {
             self.stopWords = contentsOfFile.componentsSeparatedByString("\n").filter({ $0 != "" })
         }
         
