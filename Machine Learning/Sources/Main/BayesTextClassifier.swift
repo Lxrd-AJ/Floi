@@ -48,7 +48,7 @@ class BayesTextClassifier {
         
         //Calculate the probabilities
         for (category,_) in parser.categories {
-            print("\nComputing Probabilities for \(category) ....")
+            print("Computing Probabilities for \(category) ....")
             self.probability[category] = [:]
             let denominator = self.totals[category]! + (self.corpus.keys.count)
             self.probability[category] = self.corpus.keys.reduce([:], combine:{ (wordProbability:[Word:Probability],token:Word) in
@@ -62,14 +62,15 @@ class BayesTextClassifier {
             })
         }
         
-        //TEST
-        print("*****************")
+        //MARK: -testing **will remove later**
+        print("\n*****************")
         print("Corpus Size: \(corpus.keys.count)\n");
         
         print( "rec.motorcycles - god \t \(probability["rec.motorcycles"]!["god"])" )
         print( "soc.religion.christian - god \t \(probability["soc.religion.christian"]!["god"])" )
         print( "rec.motorcycles - the \t \(probability["rec.motorcycles"]!["the"])" )
         print( "soc.religion.christian - the \t \(probability["soc.religion.christian"]!["the"])" )
+        //END MARK:
         
         if filesFailedToRead.count > 0 {
             print( "\(filesFailedToRead.count) files failed to read \n \(filesFailedToRead)")
@@ -121,26 +122,36 @@ class BayesTextClassifier {
     
     /**
      Predicts the classification of a prediction 
+     It predicts the category the contents of the `fileURL` might fall into
      - returns: A String denoting the classification
      */
     func classify( fileURL:NSURL ) -> Category? {
-        var results:[(category:Category, probability:Probability)] = []
         if let contentsOfFile = readFile( fileURL.path!, encoding:NSISOLatin1StringEncoding ){
             let tokens = filterTokens( contentsOfFile.componentsSeparatedByCharactersInSet(.whitespaceAndNewlineCharacterSet()) )
                 .filter({ self.corpus.keys.contains($0) }) //Only use words that are in our vocabulary/corpus
             let tokenProbabilityInCategory: [(Word,[(Category,Probability)])] = tokens.map({ token in //Calculate it's respective probability in each category
                 let probabilityInCategory:[(Category,Probability)] = self.parser.categories.keys.flatMap({ category -> (Category,Probability)? in
                     guard self.probability[category]![token] != 0 else{ return nil; } //probability of 0 affects entire calculation
-                    return (category, log(self.probability[category]![token]))
+                    return (category, log(self.probability[category]![token]!))
                 })
                 return (token,probabilityInCategory)
             })
-            let categoryProbability: [(Category,Probability)] = tokenProbabilityInCategory.reduce([],combine:{ //tuple elem 1 refers to `[(Category,Probability)]`
-                (res,tupArr) in zip(res,tupArr)
+            //Create a dictionary of the Prediction results(probability) for each category, sort them by order of decreasing probabilities and return 
+            //the category with the highest prediction
+            let categoryProbability: [(Category,Probability)] = tokenProbabilityInCategory.reduce([],combine:{ (res:[(Category,Probability)],tuple) in return res + tuple.1 //tuple elem 1 refers to `[(Category,Probability)]`
             })
-            //TODO: Use a dictionary to merge all the results together
+            let resultsDictionary:[Category:Probability] = categoryProbability.reduce([:], combine:{ (results:[Category:Probability],tuple:(Category,Probability)) in
+                var _results = results; let (category,probability) = tuple;
+                if _results[category] == nil { _results[category] = 0 }
+                _results[category]! += probability
+                return _results
+            })
+            let results:[(category:Category, probability:Probability)] = resultsDictionary.keys
+                .map({ category in (category,resultsDictionary[category]!)})
+                .sort({ $0.probability > $1.probability })
+            return results.first?.category
         }else{
-            print("Failed to read in URL \(fileURL) whilst classifying");
+            print("Failed to read in URL \(fileURL) whilst attempting classifying");
             return nil
         }
     }
@@ -150,7 +161,7 @@ class BayesTextClassifier {
      - todo:
         [ ] Some whitespace characters are still escaping through the filtering `$0.stringByTrimmingCharactersInSet(.whitespaceCharacterSet())` doesnt seem to be getting rid of them
      */
-    private func filterTokens( str:[String] ) -> [Stringssssss] {
+    private func filterTokens( str:[String] ) -> [String] {
         return str.filter({ $0 != "" })
             .map({ $0.stringByTrimmingCharactersInSet(.whitespaceCharacterSet()) })
             .map({ $0.stringByTrimmingCharactersInSet(.punctuationCharacterSet()) })
