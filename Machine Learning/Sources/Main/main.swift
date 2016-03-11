@@ -162,6 +162,7 @@ func kappaStatistics( results: [String:[String:Int]] ){
 
 }
 
+
 /**
     Classifying data without cross-validation
 */
@@ -222,9 +223,15 @@ tenFoldCrossValidation( "Data/pimaSmall.txt", bucketPrefix:"pimaSmall", classCol
 /**
     Testing the Bayes Text Classifier
 */
-let bayesParser = BayesTextParser( stopWordsPath:"Data/20news-bydate/stopwords174.txt", documentsPath:"Data/20news-bydate/20news-bydate-train" )
 let bayesTextClassifier = BayesTextClassifier( trainingDirectory:"Data/20news-bydate/20news-bydate-train",stopWordsPath:"Data/20news-bydate/stopwords174.txt" )
-//for (cat,fileURLs) in bayesParser.categories {
-//    print("\(cat)\t\(fileURLs.count) files")
-//}
+bayesTextClassifier.test("Data/20news-bydate/stopwords0.txt", directory:"Data/20news-bydate/20news-bydate-test-small")
+
+//Testing without stopwords
+//let noStopWordsBTC = BayesTextClassifier( trainingDirectory:"Data/20news-bydate/20news-bydate-train",stopWordsPath:"Data/20news-bydate/stopwords0.txt" )
+//noStopWordsBTC.test("Data/20news-bydate/stopwords0.txt", directory:"Data/20news-bydate/20news-bydate-test")
+
+//25 Stop words 
+//let twfiveBTWC = BayesTextClassifier( trainingDirectory:"Data/20news-bydate/20news-bydate-train",stopWordsPath:"Data/20news-bydate/stopwords25.txt" )
+//twfiveBTWC.test("Data/20news-bydate/stopwords0.txt", directory:"Data/20news-bydate/20news-bydate-test")
+
 

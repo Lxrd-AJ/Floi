@@ -13,6 +13,7 @@ import Foundation
  for each hypothesis for the current word. 
     * It loads in data from the BayesTextParser and trains itself with all the words in files for each subdirectory 
     * It then computes the probability for each word
+ - todo: Verify the accuracy of the classifier as there is most likely a bug in calculating the probabilities
  */
 class BayesTextClassifier {
     
@@ -41,6 +42,7 @@ class BayesTextClassifier {
         //Train the Classifier
         for( category, fileURLs ) in parser.categories {
             print("Training with dataset from \(category)")
+            //An Extension would be to run this training on a different thread
             let (vocabulary,total) = self.train( fileURLs, category:category, stopWords:parser.stopWords )
             self.totals[category] = total
             self.corpusByCategory[category] = vocabulary
@@ -61,16 +63,6 @@ class BayesTextClassifier {
                 return _wordProbability
             })
         }
-        
-        //MARK: -testing **will remove later**
-        print("\n*****************")
-        print("Corpus Size: \(corpus.keys.count)\n");
-        
-        print( "rec.motorcycles - god \t \(probability["rec.motorcycles"]!["god"])" )
-        print( "soc.religion.christian - god \t \(probability["soc.religion.christian"]!["god"])" )
-        print( "rec.motorcycles - the \t \(probability["rec.motorcycles"]!["the"])" )
-        print( "soc.religion.christian - the \t \(probability["soc.religion.christian"]!["the"])" )
-        //END MARK:
         
         if filesFailedToRead.count > 0 {
             print( "\(filesFailedToRead.count) files failed to read \n \(filesFailedToRead)")
@@ -123,6 +115,13 @@ class BayesTextClassifier {
     /**
      Predicts the classification of a prediction 
      It predicts the category the contents of the `fileURL` might fall into
+     - note: Not entirely sure but Probability of category seems missing using the example 
+        Classify "I am stunned by the hype ove rgravity" as a like or dislike
+        then using a posteriori Probability 
+        where h1 = P(like) * P(I|like) * P(am|like ) * P(stunned|like) * ........ 
+              h2 = P(dislike) * P(I|dislike) * ....... 
+        ATM P(like) is not being calculated just P(I|like) * P(am|like)
+        //TODO: Investigate why 
      - returns: A String denoting the classification
      */
     func classify( fileURL:NSURL ) -> Category? {
@@ -149,12 +148,45 @@ class BayesTextClassifier {
             let results:[(category:Category, probability:Probability)] = resultsDictionary.keys
                 .map({ category in (category,resultsDictionary[category]!)})
                 .sort({ $0.probability > $1.probability })
+            print("Probability of \(fileURL.lastPathComponent!) in \(results.first?.category) is \(results.first!.probability)")
             return results.first?.category
         }else{
             print("Failed to read in URL \(fileURL) whilst attempting classifying");
             return nil
         }
     }
+    
+    
+    //MARK: - Test functions
+    //Not sure if i should do the testing in main.swift 🤔🤔🤔
+    /**
+    Test all files in the test directory--that directory is organized into subdirectories--each subdir is a classification category
+    */
+    func test( stopWordsPath:String, directory:String ){
+        let reader = BayesTextParser( stopWordsPath:stopWordsPath, documentsPath:directory )
+        var correct = 0;
+        var total = 0;
+        for( category, fileURLs ) in reader.categories {
+            let (_correct, _total) = self.testCategory( category, categoryURLs:fileURLs )
+            print("\nTested with dataset from \(category): \(_correct) out of \(_total) correct")
+            correct += _correct; total += _total
+        }//end for
+        print("\n\nAccuracy is \((Float(correct)/Float(total)) * 100)% \t(\(total) test instances)")
+    }
+    
+    func testCategory( category:Category, categoryURLs:[NSURL] ) -> (correct:Int, total:Int) {
+        return categoryURLs.reduce( (0,0), combine:{ (result:(correct:Int, total:Int), url) in
+            print("Testing with \(url.lastPathComponent!)")
+            var _result = result
+            _result.total += 1
+            if let classification = self.classify( url ) {
+                if classification == category { _result.correct += 1 }
+            }
+            return _result
+        })
+    }
+    //END MARK
+    
     
     /**
      Helper function to perform custom filtering/parsing of a corpus
