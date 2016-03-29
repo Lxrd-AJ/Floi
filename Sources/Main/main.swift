@@ -223,8 +223,8 @@ tenFoldCrossValidation( "Data/pimaSmall.txt", bucketPrefix:"pimaSmall", classCol
 /**
     Testing the Bayes Text Classifier
 */
-let bayesTextClassifier = BayesTextClassifier( trainingDirectory:"Data/20news-bydate/20news-bydate-train",stopWordsPath:"Data/20news-bydate/stopwords174.txt" )
-bayesTextClassifier.test("Data/20news-bydate/stopwords0.txt", directory:"Data/20news-bydate/20news-bydate-test-small")
+// let bayesTextClassifier = BayesTextClassifier( trainingDirectory:"Data/20news-bydate/20news-bydate-train",stopWordsPath:"Data/20news-bydate/stopwords174.txt" )
+// bayesTextClassifier.test("Data/20news-bydate/stopwords0.txt", directory:"Data/20news-bydate/20news-bydate-test-small")
 
 //Testing without stopwords
 //let noStopWordsBTC = BayesTextClassifier( trainingDirectory:"Data/20news-bydate/20news-bydate-train",stopWordsPath:"Data/20news-bydate/stopwords0.txt" )

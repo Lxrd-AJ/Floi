@@ -19,7 +19,8 @@ class BayesTextParser {
     lazy var categories: [String:[NSURL]] = { //The categories and their respective file URLs
         return self.directoryContentsURL.reduce([:], combine:{ (map:[String:[NSURL]], url:NSURL) in
             var _map = map
-            do{ _map[url.lastPathComponent!] = try NSFileManager.defaultManager().contentsOfDirectoryAtURL(url, includingPropertiesForKeys: nil, options: [.SkipsHiddenFiles])
+            do{ 
+                _map[url.lastPathComponent!] = try NSFileManager.defaultManager().contentsOfDirectoryAtURL(url, includingPropertiesForKeys: nil, options: [.SkipsHiddenFiles])
             }catch let error{ print(error) } //Silently fail like the wolf hunting a sheep
             return _map
         });
@@ -27,7 +28,7 @@ class BayesTextParser {
     
     init( stopWordsPath:String, documentsPath:String ){
         //1. Read in the stop words 
-        if let contentsOfFile = readFile( stopWordsPath, encoding:NSISOLatin1StringEncoding ) {
+        if let contentsOfFile = readFile( stopWordsPath, encoding:NSISOLatin1StringEncoding ){
             self.stopWords = contentsOfFile.componentsSeparatedByString("\n").filter({ $0 != "" })
         }
         

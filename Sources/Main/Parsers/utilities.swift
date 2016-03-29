@@ -61,14 +61,14 @@ func ^^ (radix:Double, power:Double) -> Double {
 //}
 
 //Swift extensions to enable shuffling
-extension Collection {
+extension CollectionType {
     func shuffle() -> [Generator.Element] {
         var list = Array(self)
         list.shuffleInPlace()
         return list
     }
 }
-extension MutableCollection where Index == Int {
+extension MutableCollectionType where Index == Int {
     mutating func shuffleInPlace() {
         if count < 2 { return }
         for i in 0..<count-1 {
