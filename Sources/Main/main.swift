@@ -235,3 +235,8 @@ tenFoldCrossValidation( "Data/pimaSmall.txt", bucketPrefix:"pimaSmall", classCol
 //twfiveBTWC.test("Data/20news-bydate/stopwords0.txt", directory:"Data/20news-bydate/20news-bydate-test")
 
 
+
+/**
+Hierarchical Classifer
+*/
+let classifier = HierarchicalClassifier( filename:"Data/dogs.csv");

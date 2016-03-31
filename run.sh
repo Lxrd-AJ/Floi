@@ -1,5 +1,5 @@
 swift --version
-if swift build -Xcc -fblocks; then 
+if swift build; then 
 	.build/debug/Main
 else
 	echo "Failed to Build"
