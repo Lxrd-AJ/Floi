@@ -239,4 +239,12 @@ tenFoldCrossValidation( "Data/pimaSmall.txt", bucketPrefix:"pimaSmall", classCol
 /**
 Hierarchical Classifer
 */
-let classifier = HierarchicalClassifier( filename:"Data/dogs.csv");
+//let classifier = HierarchicalClassifier( filename:"Data/dogs.csv");
+
+
+
+
+/**
+k-Means CLusterer
+*/
+let classifier = kMeansClusterer( filename:"Data/dogs.csv" );
