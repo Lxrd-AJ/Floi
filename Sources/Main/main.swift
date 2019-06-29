@@ -58,6 +58,8 @@ func tenFoldCrossValidation( filename:String, bucketPrefix:String, classColumn:I
     - todo:
         - [ ] Encapsulate the similarities between the crossValidation Functions and avoid redundancy
     - parameter classColumn : The column where the class/category of data, counting starts from 0
+    - note:
+    	- Look for functions in the Swift TensorFlow library that can be used else try wrapping SwiftTensorFlow to support Bayesian statistics
 */
 func tenFoldCrossValidation_Bayes( filename:String, bucketPrefix:String, classColumn:Int ){
     var results: [String:[String:Int]] = [:]
